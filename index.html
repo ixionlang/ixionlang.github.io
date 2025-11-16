@@ -1,167 +1,173 @@
 <!DOCTYPE html>
-<html oncontextmenu="return false">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="style.css">
-<link rel="icon" href="logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-<link href="prism.css" rel="stylesheet" />
+<html lang="en">
 <head>
-    <title>Ixion</title>
-</head>
-<header class="orange-header">
-    <a href="index.html"><img src="img/fresh.png"></a>
-    <div class="centered-menu">
-       
-    </div>
-    <div class="centered-text">
-        <a href="https://t.me/lazuritelang"><img src="img/telegram.png"></a>
-        <a href="https://github.com/IxionLang/Ixion/blob/main/docs/RU.md"><img src="img/api.png"></a>
-        <a href="https://github.com/IxionLang"><img src="img/github.png"></a>
-        
-    </div>
-</header>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ixion Programming Language</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<body>
-    <script src="prism.js"></script>
-    <script>
-        function downloadJvm(os) {
-            if (os == 'windows') {
-                window.location.href = 'https://download.java.net/java/GA/jdk19.0.1/afdd2e245b014143b62ccb916125e3ce/10/GPL/openjdk-19.0.1_windows-x64_bin.zip'
-            } else if(os == 'macos') {
-                window.location.href = 'https://download.java.net/java/GA/jdk19.0.1/afdd2e245b014143b62ccb916125e3ce/10/GPL/openjdk-19.0.1_macos-aarch64_bin.tar.gz'
-            } else if(os == 'macos64') {
-                window.location.href = 'https://download.java.net/java/GA/jdk19.0.1/afdd2e245b014143b62ccb916125e3ce/10/GPL/openjdk-19.0.1_macos-x64_bin.tar.gz'
-            } else if(os == 'linux') {
-                window.location.href = 'https://download.java.net/java/GA/jdk19.0.1/afdd2e245b014143b62ccb916125e3ce/10/GPL/openjdk-19.0.1_linux-x64_bin.tar.gz'
-            } else if(os == 'video') {
-                window.location.href = 'https://www.youtube.com/watch?v=5N9B7oILIXg'
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #0f0a1a;
+            color: #f0e6ff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            filter: drop-shadow(0 0 10px rgba(237, 109, 255, 0.4));
+        }
+
+        .logo-text {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ed6dff 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            text-shadow: 0 0 20px rgba(237, 109, 255, 0.3);
+        }
+
+        .tagline {
+            color: #c084fc;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            opacity: 0.9;
+        }
+
+        .code-block {
+            background-color: #1a1029;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 30px 0;
+            text-align: left;
+            box-shadow: 0 4px 20px rgba(237, 109, 255, 0.15);
+            overflow-x: auto;
+            border: 1px solid #2d1b4e;
+        }
+
+        .code-block code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre;
+        }
+
+        .keyword {
+            color: #ed6dff;
+        }
+
+        .type {
+            color: #7dd3fc;
+        }
+
+        .function {
+            color: #d8b4fe;
+        }
+
+        .string {
+            color: #f0abfc;
+        }
+
+        .comment {
+            color: #8b5cf6;
+        }
+
+        .variable {
+            color: #fdba74;
+        }
+
+        .operator {
+            color: #e6e6fa;
+        }
+
+        .links {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ed6dff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+
+        .link:hover {
+            color: #ffffff;
+            background-color: rgba(237, 109, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(237, 109, 255, 0.2);
+        }
+
+        .link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .logo-text {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .links {
+                flex-direction: column;
+                gap: 15px;
             }
         }
-
-        function downloadIxion() {
-            window.location.href = 'https://github.com/IxionLang/Ixion/releases'
-        }
+    </style>
+</head>
+<body>
+    <div id="elm-app"></div>
+    <script src="main.js"></script>
+    <script>
+        var app = Elm.Main.init({
+            node: document.getElementById('elm-app')
+        });
     </script>
-    <br>
-    <h2>Ixion - Мультипарадигменный язык программирования для платформы JVM. </h2>
-
-
-     <h2>Преимущества использования:</h2>
-     <div class="code">
-        <div class="card">
-            <h3>Простота:</h3>
-            <a>Синтаксис языка схож с питоном, однако Ixion имеет более интересную систему типов и различные синтаксические решения, отличные от питона</a>
-        </div>
-        <div class="card">
-            <h3>Удобный API:</h3>
-            <a>Язык имеет удобное api, которое позволяет использовать Ixion и его библиотеки в таких языках как java, kotlin, clojure, scala и других</a>
-        </div>
-        <div class="card">
-            <h3>Скорость:</h3>
-            <a>Язык компилируется в jvm, что позволяет ему работать со всеми существующими java-библиотеками, а также быть быстрее питона</a>
-        </div>
-     </div>
-     <br>
-     
-
-
-
-
-
-
-
-<h2>Примеры</h2>
-     <div class="code">
-        <div class="card-codeview">
-            <pre><code class="language-scala" style="left: 0;">
-// Пример лямбды
-def main(args: String[]){
-    println(sayHello());                                     
-}
-
-def sayHello() => "Hello World";
-            </code></pre>
-        </div>
-
-<div class="card-codeview">
-            <pre><code class="language-scala" style="left: 0;">
-//возможность использовать все библиотеки других jvm языков
-using java.util.Scanner;
-
-def main(args: String[]){
-    var scanner = new Scanner(System.in);
-    println(scanner.nextLine());                                          
-}
-
-            </code></pre>
-        </div>
-
-<div class="card-codeview">
-            <pre><code class="language-scala" style="left: 0;">
-
-//nullable типы
-def main(args: String[]) {
-   var a : String?;
-   var b : String = "Hello";                              
-}
-            </code></pre>
-        </div>
-
-        </div>
-
-
-
-        
-
-     <br>
-     <h2>Установка и использование</h2>
-     <div class="code">
-        <div class="card">
-            <h3>Шаг 1</h3>
-            <a>Загрузите и установите JDK 19+ версии под вашу платформу.</a>
-            <br>
-            <button onclick="downloadJvm('windows')">Скачать Для Windows</button>
-            <button onclick="downloadJvm('macos')">Скачать Для MacOS (AArch 64)</button>
-            <button onclick="downloadJvm('macos64')">Скачать Для MacOS (x64)</button>
-            <button onclick="downloadJvm('linux')">Скачать Для Linux</button>
-            <br>
-            <button onclick="downloadJvm('video')">Видеотуториал</button>
-            
-        </div>
-        <div class="card">
-            <h3>Шаг 2</h3>
-            <a>Загрузите и установите Ixion под вашу платформу.</a>
-            <br>
-            <button onclick="downloadIxion()">Скачать Ixion</button>
-        </div>
-        <div class="card">
-            <h3>Шаг 3 (Рекомендация)</h3>
-            <a>Скопировать код сверху и попытаться запустить его</a>
-        </div>
-        <div class="card">
-            <h3>Шаг 4</h3>
-            <a>Просмотр документации и написание первой программы. Удачи в использовании!</a>
-        </div>
-        
-     </div>
-     
-
-
-     <div class="orange-footer">
-        <a href="index.html"><img src="img/fresh.png"></a>
-        <div class="centered-menu">
-            <a><h4>Ixion 2023-2024</h4></a>
-        </div>
-        <div class="centered-text">
-            <a href="https://t.me/lazuritelang"><img src="img/telegram.png"></a>
-            <a href="https://github.com/IxionLang/Ixion/blob/main/docs/RU.md"><img src="img/api.png"></a>
-            <a href="https://github.com/IxionLang"><img src="img/github.png"></a>
-        </div>
-     </div>
 </body>
 </html>
