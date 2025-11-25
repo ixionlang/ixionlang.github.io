@@ -48,7 +48,7 @@ viewLogo =
     div [ class "logo" ]
         [ div [ class "logo-main" ]
             [ img
-                [ src "https://raw.githubusercontent.com/ixionlang/ixion-jvm/main/assets/icon.png"
+                [ src "https://raw.githubusercontent.com/ixionlang/ixion/main/assets/icon.png"
                 , alt "Ixion Logo"
                 , class "logo-icon"
                 ]
