@@ -163,11 +163,5 @@ viewLinks =
             , target "_blank"
             ]
             [ text "Документация" ]
-        , a
-            [ href "https://t.me/ixionlang"
-            , class "link"
-            , target "_blank"
-            ]
-            [ text "Telegram" ]
         ]
         
