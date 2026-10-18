@@ -1,173 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ixion Programming Language</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'JetBrains Mono', monospace;
-            background-color: #0f0a1a;
-            color: #f0e6ff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .logo {
-            margin-bottom: 20px;
-        }
-
-        .logo-main {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 10px;
-        }
-
-        .logo-icon {
-            width: 60px;
-            height: 60px;
-            filter: drop-shadow(0 0 10px rgba(237, 109, 255, 0.4));
-        }
-
-        .logo-text {
-            font-size: 3.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ed6dff 0%, #c084fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -1px;
-            text-shadow: 0 0 20px rgba(237, 109, 255, 0.3);
-        }
-
-        .tagline {
-            color: #c084fc;
-            font-size: 1.2rem;
-            font-weight: 400;
-            letter-spacing: -0.5px;
-            opacity: 0.9;
-        }
-
-        .code-block {
-            background-color: #1a1029;
-            border-radius: 8px;
-            padding: 24px;
-            margin: 30px 0;
-            text-align: left;
-            box-shadow: 0 4px 20px rgba(237, 109, 255, 0.15);
-            overflow-x: auto;
-            border: 1px solid #2d1b4e;
-        }
-
-        .code-block code {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            white-space: pre;
-        }
-
-        .keyword {
-            color: #ed6dff;
-        }
-
-        .type {
-            color: #7dd3fc;
-        }
-
-        .function {
-            color: #d8b4fe;
-        }
-
-        .string {
-            color: #f0abfc;
-        }
-
-        .comment {
-            color: #8b5cf6;
-        }
-
-        .variable {
-            color: #fdba74;
-        }
-
-        .operator {
-            color: #e6e6fa;
-        }
-
-        .links {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        .link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #ed6dff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 8px 16px;
-            border-radius: 6px;
-        }
-
-        .link:hover {
-            color: #ffffff;
-            background-color: rgba(237, 109, 255, 0.15);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(237, 109, 255, 0.2);
-        }
-
-        .link svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        @media (max-width: 600px) {
-            .logo-text {
-                font-size: 2.5rem;
-            }
-            
-            .tagline {
-                font-size: 1rem;
-            }
-            
-            .links {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-    </style>
-</head>
-<body>
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f7f4" />
+    <meta
+      name="description"
+      content="Ixion — статически типизированный язык для JVM. Алгебраические типы данных, неизменяемые структуры и выразительное сопоставление с образцом."
+    />
+    <meta property="og:title" content="Ixion — язык программирования для JVM" />
+    <meta
+      property="og:description"
+      content="Выразительные типы. Неизменяемые данные. Знакомая платформа JVM."
+    />
+    <meta property="og:type" content="website" />
+    <title>Ixion — язык программирования для JVM</title>
+    <link rel="icon" type="image/png" href="assets/ixion-planet.png" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+    <script src="site.js" defer></script>
+  </head>
+  <body>
     <div id="elm-app"></div>
-    <script src="main.js"></script>
-    <script>
-        var app = Elm.Main.init({
-            node: document.getElementById('elm-app')
-        });
-    </script>
-</body>
+    <noscript
+      ><main
+        style="
+          max-width: 700px;
+          margin: 80px auto;
+          padding: 24px;
+          font-family: system-ui;
+        "
+      >
+        <h1>Ixion — язык программирования для JVM</h1>
+        <p>
+          Статически типизированный язык для JVM с алгебраическими типами и
+          неизменяемыми данными. Для интерактивных примеров включите JavaScript.
+        </p>
+        <a href="https://github.com/ixionlang/ixion"
+          >Репозиторий и документация ↗</a
+        >
+      </main></noscript
+    >
+  </body>
 </html>

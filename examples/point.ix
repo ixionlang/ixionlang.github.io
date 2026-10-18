@@ -1,0 +1,15 @@
+use <std>
+
+type Point = struct { x: int, y: int }
+
+def move(point: Point): Point {
+    return point with { x = point.x + 10 }
+}
+
+def main() {
+    const origin = Point(1, 2)
+    const moved = move(origin)
+
+    // origin.x всё ещё равен 1
+    std::println(moved.x)
+}

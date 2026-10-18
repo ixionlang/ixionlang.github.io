@@ -1,1 +1,6 @@
-# ixion.github.io
+# Ixion website
+
+```sh
+make build
+make preview
+```
