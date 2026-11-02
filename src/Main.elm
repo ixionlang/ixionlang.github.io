@@ -56,6 +56,21 @@ repo =
     "https://github.com/ixionlang/ixion"
 
 
+docsUrl : String
+docsUrl =
+    "docs/index.html"
+
+
+specUrl : String
+specUrl =
+    "spec/specification.ru.html"
+
+
+grammarUrl : String
+grammarUrl =
+    "spec/grammar.html"
+
+
 link : String -> String -> Html Msg
 link url caption =
     a [ href url ] [ text caption ]
@@ -66,6 +81,19 @@ label value =
     p [ class "eyebrow" ] [ text value ]
 
 
+docsCard : String -> String -> String -> String -> List String -> Html Msg
+docsCard number title description url tags =
+    a [ href url, class "docs-card" ]
+        [ span [ class "docs-card-number" ] [ text number ]
+        , h3 [] [ text title ]
+        , p [] [ text description ]
+        , span [ class "docs-card-foot" ]
+            [ span [ class "docs-card-tags" ] (List.map (\tag -> span [] [ text tag ]) tags)
+            , span [ class "docs-card-arrow", attribute "aria-hidden" "true" ] [ text "↗" ]
+            ]
+        ]
+
+
 view : Model -> Html Msg
 view model =
     div []
@@ -73,7 +101,7 @@ view model =
         , header [ class "site-header wrap" ]
             [ a [ href "#", class "brand", attribute "aria-label" "Ixion — главная" ] [ img [ src "assets/ixion-logo.png", alt "ixion", width 126, height 42 ] [] ]
             , nav [ attribute "aria-label" "Основная навигация" ]
-                [ link "#examples" "Примеры", link (repo ++ "/blob/main/docs/ru.md") "Документация", a [ href repo, class "github-link" ] [ text "GitHub ↗" ] ]
+                [ link "#examples" "Примеры", link docsUrl "Документация", link specUrl "Спецификация", a [ href repo, class "github-link" ] [ text "GitHub ↗" ] ]
             ]
         , main_ [ id "main" ]
             [ section [ class "hero wrap" ]
@@ -81,7 +109,7 @@ view model =
                     [ label "ЯЗЫК ПРОГРАММИРОВАНИЯ ДЛЯ JVM"
                     , h1 [] [ text "Ixion —", br [] [], span [] [ text "язык для JVM." ] ]
                     , p [ class "hero-description" ] [ text "Статическая типизация, алгебраические типы данных и неизменяемые структуры. Компилируется в байткод JVM и Java-код." ]
-                    , div [ class "hero-actions" ] [ a [ href (repo ++ "/blob/main/docs/ru.md"), class "button primary" ] [ text "Документация", span [] [ text "↗" ] ], a [ href "#examples", class "text-link" ] [ text "Посмотреть код ↓" ] ]
+                    , div [ class "hero-actions" ] [ a [ href docsUrl, class "button primary" ] [ text "Документация", span [] [ text "↗" ] ], a [ href "#examples", class "text-link" ] [ text "Посмотреть код ↓" ] ]
                     , p [ class "hero-note" ] [ span [ class "status-dot" ] [], text "Открытый исходный код · В активной разработке" ]
                     ]
                 , div [ class "hero-art", attribute "aria-hidden" "true" ]
@@ -113,6 +141,32 @@ view model =
                                 )
                             ]
                         ]
+                    ]
+                ]
+            , section [ id "docs", class "docs-section wrap" ]
+                [ div [ class "section-heading" ]
+                    [ div [] [ label "ДОКУМЕНТАЦИЯ", h2 [] [ text "Изучайте Ixion" ] ]
+                    , p [] [ text "Руководство для начинающих, нормативная спецификация и грамматика языка." ]
+                    ]
+                , div [ class "docs-cards" ]
+                    [ docsCard "01" "Руководство" "Пошаговое введение: от первой программы до обобщённых типов и модулей." "docs/ru.html" [ "RU", "25 разделов" ]
+                    , docsCard "02" "Спецификация" "Нормативный контракт Core 1.0: система типов, вычисление, грамматика." specUrl [ "RU", "EN" ]
+                    , docsCard "03" "Грамматика" "Полная синтаксическая грамматика языка в нотации EBNF." grammarUrl [ "EBNF" ]
+                    ]
+                ]
+            , section [ class "closing wrap" ]
+                [ img [ src "assets/ixion-planet.png", alt "", width 72, height 72 ] []
+                , h2 [] [ text "Начните писать на Ixion" ]
+                , p [] [ text "Откройте руководство, соберите компилятор и запустите первую программу." ]
+                , a [ href docsUrl, class "button primary" ] [ text "Открыть руководство", span [] [ text "↗" ] ]
+                ]
+            , footer [ class "site-footer wrap" ]
+                [ span [ class "footer-brand" ] [ text "ixion" ]
+                , p [] [ text "© 2026 Ixion. Открытый исходный код." ]
+                , div []
+                    [ link docsUrl "Документация"
+                    , link specUrl "Спецификация"
+                    , link repo "GitHub ↗"
                     ]
                 ]
             ]

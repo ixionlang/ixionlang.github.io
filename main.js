@@ -5232,6 +5232,93 @@ var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$code = _VirtualDom_node('code');
 var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$html$Html$h3 = _VirtualDom_node('h3');
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
+var $elm$html$Html$p = _VirtualDom_node('p');
+var $elm$html$Html$span = _VirtualDom_node('span');
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $author$project$Main$docsCard = F5(
+	function (number, title, description, url, tags) {
+		return A2(
+			$elm$html$Html$a,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$href(url),
+					$elm$html$Html$Attributes$class('docs-card')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$span,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('docs-card-number')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(number)
+						])),
+					A2(
+					$elm$html$Html$h3,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text(title)
+						])),
+					A2(
+					$elm$html$Html$p,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text(description)
+						])),
+					A2(
+					$elm$html$Html$span,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('docs-card-foot')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$span,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('docs-card-tags')
+								]),
+							A2(
+								$elm$core$List$map,
+								function (tag) {
+									return A2(
+										$elm$html$Html$span,
+										_List_Nil,
+										_List_fromArray(
+											[
+												$elm$html$Html$text(tag)
+											]));
+								},
+								tags)),
+							A2(
+							$elm$html$Html$span,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('docs-card-arrow'),
+									A2($elm$html$Html$Attributes$attribute, 'aria-hidden', 'true')
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('↗')
+								]))
+						]))
+				]));
+	});
+var $author$project$Main$docsUrl = 'docs/index.html';
 var $author$project$Main$exampleDescription = function (example) {
 	switch (example) {
 		case 0:
@@ -5308,12 +5395,9 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
-var $elm$html$Html$span = _VirtualDom_node('span');
 var $author$project$Main$tabId = function (example) {
 	return 'tab-' + $author$project$Main$exampleFile(example);
 };
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$exampleTab = F2(
 	function (selected, _v0) {
 		var example = _v0.a;
@@ -5375,9 +5459,10 @@ var $author$project$Main$exampleTitle = function (example) {
 			return 'Обобщённые функции';
 	}
 };
+var $elm$html$Html$footer = _VirtualDom_node('footer');
+var $author$project$Main$grammarUrl = 'spec/grammar.html';
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
-var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$header = _VirtualDom_node('header');
 var $elm$html$Html$Attributes$height = function (n) {
 	return A2(
@@ -5599,14 +5684,7 @@ var $author$project$Main$highlight = function (source) {
 			}),
 		$elm$core$String$lines(source));
 };
-var $elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
 var $elm$html$Html$img = _VirtualDom_node('img');
-var $elm$html$Html$p = _VirtualDom_node('p');
 var $author$project$Main$label = function (value) {
 	return A2(
 		$elm$html$Html$p,
@@ -5637,6 +5715,7 @@ var $elm$html$Html$nav = _VirtualDom_node('nav');
 var $elm$html$Html$pre = _VirtualDom_node('pre');
 var $author$project$Main$repo = 'https://github.com/ixionlang/ixion';
 var $elm$html$Html$section = _VirtualDom_node('section');
+var $author$project$Main$specUrl = 'spec/specification.ru.html';
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -5710,7 +5789,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								A2($author$project$Main$link, '#examples', 'Примеры'),
-								A2($author$project$Main$link, $author$project$Main$repo + '/blob/main/docs/ru.md', 'Документация'),
+								A2($author$project$Main$link, $author$project$Main$docsUrl, 'Документация'),
+								A2($author$project$Main$link, $author$project$Main$specUrl, 'Спецификация'),
 								A2(
 								$elm$html$Html$a,
 								_List_fromArray(
@@ -5786,7 +5866,7 @@ var $author$project$Main$view = function (model) {
 												$elm$html$Html$a,
 												_List_fromArray(
 													[
-														$elm$html$Html$Attributes$href($author$project$Main$repo + '/blob/main/docs/ru.md'),
+														$elm$html$Html$Attributes$href($author$project$Main$docsUrl),
 														$elm$html$Html$Attributes$class('button primary')
 													]),
 												_List_fromArray(
@@ -6112,6 +6192,165 @@ var $author$project$Main$view = function (model) {
 														}())
 													]))
 											]))
+									]))
+							])),
+						A2(
+						$elm$html$Html$section,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$id('docs'),
+								$elm$html$Html$Attributes$class('docs-section wrap')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('section-heading')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$div,
+										_List_Nil,
+										_List_fromArray(
+											[
+												$author$project$Main$label('ДОКУМЕНТАЦИЯ'),
+												A2(
+												$elm$html$Html$h2,
+												_List_Nil,
+												_List_fromArray(
+													[
+														$elm$html$Html$text('Изучайте Ixion')
+													]))
+											])),
+										A2(
+										$elm$html$Html$p,
+										_List_Nil,
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Руководство для начинающих, нормативная спецификация и грамматика языка.')
+											]))
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('docs-cards')
+									]),
+								_List_fromArray(
+									[
+										A5(
+										$author$project$Main$docsCard,
+										'01',
+										'Руководство',
+										'Пошаговое введение: от первой программы до обобщённых типов и модулей.',
+										'docs/ru.html',
+										_List_fromArray(
+											['RU', '25 разделов'])),
+										A5(
+										$author$project$Main$docsCard,
+										'02',
+										'Спецификация',
+										'Нормативный контракт Core 1.0: система типов, вычисление, грамматика.',
+										$author$project$Main$specUrl,
+										_List_fromArray(
+											['RU', 'EN'])),
+										A5(
+										$author$project$Main$docsCard,
+										'03',
+										'Грамматика',
+										'Полная синтаксическая грамматика языка в нотации EBNF.',
+										$author$project$Main$grammarUrl,
+										_List_fromArray(
+											['EBNF']))
+									]))
+							])),
+						A2(
+						$elm$html$Html$section,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('closing wrap')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$img,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$src('assets/ixion-planet.png'),
+										$elm$html$Html$Attributes$alt(''),
+										$elm$html$Html$Attributes$width(72),
+										$elm$html$Html$Attributes$height(72)
+									]),
+								_List_Nil),
+								A2(
+								$elm$html$Html$h2,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Начните писать на Ixion')
+									])),
+								A2(
+								$elm$html$Html$p,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Откройте руководство, соберите компилятор и запустите первую программу.')
+									])),
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href($author$project$Main$docsUrl),
+										$elm$html$Html$Attributes$class('button primary')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Открыть руководство'),
+										A2(
+										$elm$html$Html$span,
+										_List_Nil,
+										_List_fromArray(
+											[
+												$elm$html$Html$text('↗')
+											]))
+									]))
+							])),
+						A2(
+						$elm$html$Html$footer,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('site-footer wrap')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('footer-brand')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('ixion')
+									])),
+								A2(
+								$elm$html$Html$p,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text('© 2026 Ixion. Открытый исходный код.')
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_Nil,
+								_List_fromArray(
+									[
+										A2($author$project$Main$link, $author$project$Main$docsUrl, 'Документация'),
+										A2($author$project$Main$link, $author$project$Main$specUrl, 'Спецификация'),
+										A2($author$project$Main$link, $author$project$Main$repo, 'GitHub ↗')
 									]))
 							]))
 					]))

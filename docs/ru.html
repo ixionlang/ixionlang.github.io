@@ -1,0 +1,1207 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f7f4" />
+    <meta name="description" content="Руководство по языку программирования Ixion для начинающих: синтаксис, типы, списки, структуры, enum, сопоставление с образцом и модули." />
+    <meta property="og:title" content="Руководство для начинающих" />
+    <meta property="og:description" content="Руководство по языку программирования Ixion для начинающих: синтаксис, типы, списки, структуры, enum, сопоставление с образцом и модули." />
+    <meta property="og:type" content="article" />
+    <title>Руководство для начинающих — Ixion</title>
+    <link rel="icon" type="image/png" href="../assets/ixion-planet.png" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../assets/docs.css" />
+  </head>
+  <body class="docs-page">
+    <a class="skip-link" href="#main">К содержимому</a>
+    <div class="docs-header-bar">
+  <header class="site-header docs-header wrap">
+    <a class="brand" href="../index.html" aria-label="Ixion — Главная">
+      <img src="../assets/ixion-logo.png" alt="ixion" width="126" height="42" />
+    </a>
+    <nav class="docs-nav" aria-label="Основная навигация">
+      <a href="../docs/ru.html" class="active">Руководство</a>
+      <a href="../spec/specification.ru.html">Спецификация</a>
+      <a href="../spec/grammar.html">Грамматика</a>
+      <a class="docs-github" href="https://github.com/ixionlang/ixion" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    </nav>
+    <button class="docs-menu-toggle" type="button" aria-controls="docs-sidebar" aria-expanded="false">
+      <span aria-hidden="true">☰</span> Содержание
+    </button>
+  </header>
+</div>
+    <div class="reading-progress" aria-hidden="true"><span></span></div>
+    <div class="docs-layout">
+  <button class="docs-overlay" type="button" aria-label="Закрыть меню" tabindex="-1"></button>
+  <aside class="docs-sidebar" id="docs-sidebar">
+    <button class="docs-menu-close" type="button" aria-label="Закрыть меню"><span aria-hidden="true">×</span></button>
+    <p class="sidebar-eyebrow">РУКОВОДСТВО</p>
+    <a class="sidebar-title" href="ru.html">Ixion: руководство для начинающих</a>
+    <p class="sidebar-meta">RU · 25 разделов</p>
+    <label class="docs-search">
+      <span class="visually-hidden">Поиск по разделам</span>
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.5"></circle><path d="m10.5 10.5 3 3"></path></svg>
+      <input type="search" placeholder="Найти раздел…" aria-label="Поиск по разделам" autocomplete="off" />
+    </label>
+    <nav class="docs-toc" aria-label="Содержание документа">
+      <div class="toc-section"><a class="toc-link toc-level-2" href="#подготовка-и-запуск">Подготовка и запуск</a><div class="toc-sub"><a class="toc-link toc-level-3" href="#что-понадобится">Что понадобится</a><a class="toc-link toc-level-3" href="#сборка-компилятора">Сборка компилятора</a><a class="toc-link toc-level-3" href="#запуск-файла">Запуск файла</a><a class="toc-link toc-level-3" href="#режимы-компилятора">Режимы компилятора</a></div></div><div class="toc-section"><a class="toc-link toc-level-2" href="#первая-программа">Первая программа</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#как-читать-код">Как читать код</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#значения-и-базовые-типы">Значения и базовые типы</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#имена-const-и-var">Имена: const и var</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#операторы-и-условия">Операторы и условия</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#функции">Функции</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#циклы">Циклы</a><div class="toc-sub"><a class="toc-link toc-level-3" href="#while">While</a><a class="toc-link toc-level-3" href="#for">For</a></div></div><div class="toc-section"><a class="toc-link toc-level-2" href="#неизменяемые-списки">Неизменяемые списки</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#option-значение-может-отсутствовать">Option: значение может отсутствовать</a><div class="toc-sub"><a class="toc-link toc-level-3" href="#безопасное-обновление">Безопасное обновление</a></div></div><div class="toc-section"><a class="toc-link toc-level-2" href="#функциональные-операции-со-списками">Функциональные операции со списками</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#структуры-и-обновление-with">Структуры и обновление with</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#кортежи">Кортежи</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#enum-несколько-форм-одного-типа">Enum: несколько форм одного типа</a><div class="toc-sub"><a class="toc-link toc-level-3" href="#рекурсивные-данные">Рекурсивные данные</a></div></div><div class="toc-section"><a class="toc-link toc-level-2" href="#case-и-шаблоны">Case и шаблоны</a><div class="toc-sub"><a class="toc-link toc-level-3" href="#шаблоны">Шаблоны</a><a class="toc-link toc-level-3" href="#дополнительные-условия-guards">Дополнительные условия: guards</a><a class="toc-link toc-level-3" href="#полнота-и-недостижимые-ветви">Полнота и недостижимые ветви</a><a class="toc-link toc-level-3" href="#блоки-ветвей-и-return">Блоки ветвей и return</a></div></div><div class="toc-section"><a class="toc-link toc-level-2" href="#result-ожидаемые-ошибки">Result: ожидаемые ошибки</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#обобщённые-типы-и-функции">Обобщённые типы и функции</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#лямбды-и-функции-как-значения">Лямбды и функции как значения</a><div class="toc-sub"><a class="toc-link toc-level-3" href="#захват-по-значению">Захват по значению</a></div></div><div class="toc-section"><a class="toc-link toc-level-2" href="#объединения-типов-и-any">Объединения типов и any</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#модули-и-несколько-файлов">Модули и несколько файлов</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#стандартные-модули">Стандартные модули</a><div class="toc-sub"><a class="toc-link toc-level-3" href="#args-и-fs-аргументы-программы-и-файлы">Args и fs: аргументы программы и файлы</a><a class="toc-link toc-level-3" href="#std-вывод-и-работа-с-данными">Std: вывод и работа с данными</a><a class="toc-link toc-level-3" href="#strings-преобразование-текста">Strings: преобразование текста</a><a class="toc-link toc-level-3" href="#http-сетевые-запросы">Http: сетевые запросы</a><a class="toc-link toc-level-3" href="#async-фоновые-действия">Async: фоновые действия</a></div></div><div class="toc-section"><a class="toc-link toc-level-2" href="#учебный-проект-список-задач">Учебный проект: список задач</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#частые-ошибки">Частые ошибки</a><div class="toc-sub"><a class="toc-link toc-level-3" href="#нельзя-присвоить-const">«Нельзя присвоить const»</a><a class="toc-link toc-level-3" href="#не-удаётся-вывести-тип">«Не удаётся вывести тип»</a><a class="toc-link toc-level-3" href="#case-не-покрывает-все-значения">«Case не покрывает все значения»</a><a class="toc-link toc-level-3" href="#недостижимая-ветвь">«Недостижимая ветвь»</a><a class="toc-link toc-level-3" href="#ожидался-int-получен-optionint">«Ожидался int, получен Option[int]»</a><a class="toc-link toc-level-3" href="#функция-не-всегда-возвращает-значение">«Функция не всегда возвращает значение»</a><a class="toc-link toc-level-3" href="#готовый-int-не-подходит-вместо-float">«Готовый int[] не подходит вместо float[]»</a><a class="toc-link toc-level-3" href="#ошибки-запуска">Ошибки запуска</a></div></div><div class="toc-section"><a class="toc-link toc-level-2" href="#ограничения-текущей-версии">Ограничения текущей версии</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#упражнения-и-памятка">Упражнения и памятка</a><div class="toc-sub"><a class="toc-link toc-level-3" href="#попробуйте-самостоятельно">Попробуйте самостоятельно</a><a class="toc-link toc-level-3" href="#короткая-памятка">Короткая памятка</a></div></div>
+      <p class="toc-empty">Разделы не найдены</p>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="https://github.com/ixionlang/ixion/issues" target="_blank" rel="noopener noreferrer">Нашли ошибку? Откройте issue ↗</a>
+    </div>
+  </aside>
+  <main class="docs-main" id="main">
+    <div class="doc-hero">
+      <div class="doc-breadcrumb">
+        <a href="../docs/index.html">Документация</a>
+        <span aria-hidden="true">/</span>
+        <span>руководство</span>
+      </div>
+      <div class="doc-hero-row">
+        <div>
+          <h1>Ixion: руководство для начинающих</h1>
+          <p class="doc-subtitle">Пошаговое введение в язык Ixion: от первой программы до обобщённых типов, модулей и стандартной библиотеки.</p>
+        </div>
+        <div class="doc-lang-switch" aria-label="Language">
+    <span class="active">RU</span>
+  </div>
+      </div>
+      <div class="doc-meta"><span><strong>Язык:</strong> RU</span><span><strong>Разделов:</strong> 25</span></div>
+    </div>
+    <article class="doc-content">
+      <p class="doc-lead">Ixion — язык программирования со статической типизацией, который работает на JVM. Он позволяет описывать данные через структуры, списки, кортежи и варианты <code>enum</code>, а затем разбирать их с помощью <code>case</code>.</p>
+<p>Это руководство рассчитано на читателя, который только начинает знакомство с языком. Знание Kotlin или Java не требуется. Если программирование для вас тоже новая тема, читайте разделы по порядку: каждый следующий использует предыдущие.</p>
+<p>Руководство описывает реализованное ядро текущей рабочей версии компилятора. <a href="../spec/specification.ru.html">Спецификация</a> содержит также целевые возможности, которые ещё находятся в разработке. Их перечень есть в <a href="#ограничения-текущей-версии">разделе об ограничениях</a> и</p>
+<h2 id="подготовка-и-запуск">Подготовка и запуск<a class="heading-anchor" href="#подготовка-и-запуск" aria-label="Ссылка на раздел">#</a></h2>
+<h3 id="что-понадобится">Что понадобится<a class="heading-anchor" href="#что-понадобится" aria-label="Ссылка на раздел">#</a></h3>
+<ul><li>JDK 21: комплект Java, в который входят команды <code>java</code> и <code>javac</code>.</li><li>Git для получения исходников или распакованная копия репозитория.</li><li>Любой текстовый редактор. Исходные файлы Ixion имеют расширение <code>.ix</code>.</li></ul>
+<p>Gradle отдельно устанавливать не нужно: в репозитории есть <code>gradlew</code> для macOS/Linux и <code>gradlew.bat</code> для Windows. Первый запуск скачивает Gradle и зависимости проекта, поэтому требует подключения к сети.</p>
+<p>В терминале проверьте Java:</p>
+<div class="code-block" data-lang="sh">
+  <div class="code-block-bar">
+    <span class="code-lang">Shell</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-sh"><span class="tok-kw">java</span> <span class="tok-flag">-version</span>
+<span class="tok-kw">javac</span> <span class="tok-flag">-version</span></code></pre>
+</div>
+<p>Обе команды должны указывать на JDK 21. Если у вас установлено несколько JDK, выберите 21 через <code>JAVA_HOME</code> и добавьте его каталог <code>bin</code> в <code>PATH</code>. Например, для macOS/Linux, подставив настоящий путь к установленному JDK:</p>
+<div class="code-block" data-lang="sh">
+  <div class="code-block-bar">
+    <span class="code-lang">Shell</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-sh"><span class="tok-kw">export</span> <span class="tok-type">JAVA_HOME</span>=<span class="tok-str">&quot;/path/to/jdk-21&quot;</span>
+<span class="tok-kw">export</span> <span class="tok-type">PATH</span>=<span class="tok-str">&quot;$JAVA_HOME/bin:$PATH&quot;</span></code></pre>
+</div>
+<p><code>/path/to/jdk-21</code> — обозначение для замены, а не готовый путь.</p>
+<h3 id="сборка-компилятора">Сборка компилятора<a class="heading-anchor" href="#сборка-компилятора" aria-label="Ссылка на раздел">#</a></h3>
+<p>Откройте терминал в корне репозитория — в каталоге, где находятся <code>build.gradle</code> и <code>gradlew</code> — и выполните:</p>
+<div class="code-block" data-lang="sh">
+  <div class="code-block-bar">
+    <span class="code-lang">Shell</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-sh"><span class="tok-fn">./gradlew</span> build</code></pre>
+</div>
+<p>В PowerShell на Windows:</p>
+<div class="code-block" data-lang="powershell">
+  <div class="code-block-bar">
+    <span class="code-lang">PowerShell</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-powershell">.\<span class="tok-kw">gradlew</span>.bat build</code></pre>
+</div>
+<p>Сборка также запускает тесты. Отдельная команда проверки — <code>./gradlew test</code>. Если в macOS/Linux оболочка сообщает <code>permission denied</code> для wrapper, выполните <code>chmod +x gradlew</code> и повторите запуск.</p>
+<h3 id="запуск-файла">Запуск файла<a class="heading-anchor" href="#запуск-файла" aria-label="Ссылка на раздел">#</a></h3>
+<p>Создайте в корне репозитория файл <code>hello.ix</code> с программой из следующего раздела. Рядом с руководством есть вспомогательный <a href="run-ixion.gradle">Gradle-скрипт</a>, который подключает компилятор вместе с его зависимостями:</p>
+<div class="code-block" data-lang="sh">
+  <div class="code-block-bar">
+    <span class="code-lang">Shell</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-sh"><span class="tok-fn">./gradlew</span> <span class="tok-flag">-q</span> <span class="tok-flag">-I</span> docs/run-ixion.gradle <span class="tok-kw">runIxion</span> <span class="tok-flag">--args</span>=<span class="tok-str">&quot;hello.ix&quot;</span></code></pre>
+</div>
+<p>Аналогичная команда PowerShell:</p>
+<div class="code-block" data-lang="powershell">
+  <div class="code-block-bar">
+    <span class="code-lang">PowerShell</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-powershell">.\<span class="tok-kw">gradlew</span>.bat <span class="tok-flag">-q</span> <span class="tok-flag">-I</span> docs/run-ixion.gradle <span class="tok-kw">runIxion</span> <span class="tok-flag">--args</span>=<span class="tok-str">&quot;hello.ix&quot;</span></code></pre>
+</div>
+<p>Все команды ниже предполагают запуск из корня репозитория. Путь к программе может быть относительным, например <code>examples/tutorial.ix</code>. Локальные модули ищутся относительно корня проекта, из которого запущен компилятор.</p>
+<h3 id="режимы-компилятора">Режимы компилятора<a class="heading-anchor" href="#режимы-компилятора" aria-label="Ссылка на раздел">#</a></h3>
+<p>По умолчанию Ixion создаёт JVM-байткод и запускает программу. Второй вариант сначала генерирует Java, затем компилирует её через <code>javac</code> и запускает:</p>
+<div class="code-block" data-lang="sh">
+  <div class="code-block-bar">
+    <span class="code-lang">Shell</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-sh"><span class="tok-fn">./gradlew</span> <span class="tok-flag">-q</span> <span class="tok-flag">-I</span> docs/run-ixion.gradle <span class="tok-kw">runIxion</span> <span class="tok-flag">--args</span>=<span class="tok-str">&quot;--java hello.ix&quot;</span></code></pre>
+</div>
+<div class="table-wrap"><table><thead><tr><th class="align-left">Аргумент</th><th class="align-left">Действие</th></tr></thead><tbody><tr><td class="align-left"><code>--help</code></td><td class="align-left">Показать справку CLI</td></tr><tr><td class="align-left"><code>--compile-only</code></td><td class="align-left">Создать байткод, не запускать программу</td></tr><tr><td class="align-left"><code>--java</code></td><td class="align-left">Использовать генерацию Java</td></tr><tr><td class="align-left"><code>--java --compile-only</code></td><td class="align-left">Только создать Java-исходники</td></tr><tr><td class="align-left"><code>--optimize</code></td><td class="align-left">Включить существующие проходы оптимизации</td></tr></tbody></table></div>
+<p>Результаты компиляции появляются в каталоге <code>.out</code> в корне проекта. Обычный JAR из <code>build/libs</code> не содержит все зависимости и не настроен как самостоятельный исполняемый дистрибутив. Для знакомства пользуйтесь командой выше. Новые ADT и списки проверяются для JVM и Java; Go не является целью этого руководства.</p>
+<h2 id="первая-программа">Первая программа<a class="heading-anchor" href="#первая-программа" aria-label="Ссылка на раздел">#</a></h2>
+<p>Скопируйте весь пример в <code>hello.ix</code>:</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-str">&quot;Привет, Ixion!&quot;</span>)
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">Привет, Ixion!</code></pre>
+</div>
+<p><code>use &lt;std&gt;</code> подключает стандартный модуль. <code>def</code> объявляет функцию, а <code>main</code> — точка входа: компилятор начинает выполнение с её тела между <code>{</code> и <code>}</code>. <code>std::println</code> выводит значение и переходит на следующую строку.</p>
+<p>Далее каждый пример с функцией <code>main</code> — самостоятельная программа. Заменяйте содержимое файла целиком; несколько таких примеров не нужно склеивать в один файл. Блок «Вывод» показывает вывод программы без служебных сообщений сборки.</p>
+<h2 id="как-читать-код">Как читать код<a class="heading-anchor" href="#как-читать-код" aria-label="Ссылка на раздел">#</a></h2>
+<p>Вызов функции записывается как <code>имя(аргументы)</code>. Двойное двоеточие <code>::</code> отделяет имя модуля или типа от имени функции или варианта. Точка <code>.</code> читает поле структуры.</p>
+<p>Комментарии помогают объяснять код и не выполняются:</p>
+<div class="code-block" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Текст</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">// Комментарий до конца строки
+/* Комментарий, который может занимать несколько строк */</code></pre>
+</div>
+<p>Пишите каждый оператор с новой строки. Точки с запятой не нужны. Между аргументами, параметрами, элементами списка, полями и ветвями <code>case</code> ставьте запятые. В объявлениях полей, вариантах <code>enum</code> и ветвях <code>case</code> завершающая запятая допустима. В литерале списка ставьте запятые только между элементами: <code>[1, 2, 3]</code>; завершающая запятая списка пока не поддерживается парсером.</p>
+<p>Регистр важен: <code>count</code> и <code>Count</code> — разные имена. В примерах типы называются <code>Point</code>, <code>Task</code>, <code>Option</code>, а функции и переменные — <code>sum</code>, <code>task</code>, <code>count</code>. Это соглашение оформления. Выбирайте имена, которые объясняют смысл данных.</p>
+<h2 id="значения-и-базовые-типы">Значения и базовые типы<a class="heading-anchor" href="#значения-и-базовые-типы" aria-label="Ссылка на раздел">#</a></h2>
+<p>Значение — это конкретные данные: число <code>42</code>, строка <code>&quot;текст&quot;</code> или <code>true</code>. Тип описывает, какие данные допустимы и какие действия с ними можно выполнять. Проверка типов происходит до запуска программы.</p>
+<div class="table-wrap"><table><thead><tr><th class="align-left">Тип</th><th class="align-left">Примеры</th><th class="align-left">Назначение</th></tr></thead><tbody><tr><td class="align-left"><code>int</code></td><td class="align-left"><code>0</code>, <code>42</code>, <code>-7</code></td><td class="align-left">Целое 32-битное число</td></tr><tr><td class="align-left"><code>float</code></td><td class="align-left"><code>1.5</code>, <code>1.5f</code></td><td class="align-left">Дробное число одинарной точности</td></tr><tr><td class="align-left"><code>double</code></td><td class="align-left"><code>1.5d</code></td><td class="align-left">Дробное число двойной точности</td></tr><tr><td class="align-left"><code>bool</code></td><td class="align-left"><code>true</code>, <code>false</code></td><td class="align-left">Логическое значение</td></tr><tr><td class="align-left"><code>char</code></td><td class="align-left"><code>&#39;A&#39;</code></td><td class="align-left">Одна UTF-16 единица символа</td></tr><tr><td class="align-left"><code>string</code></td><td class="align-left"><code>&quot;Привет&quot;</code></td><td class="align-left">Неизменяемый текст</td></tr><tr><td class="align-left"><code>unit</code></td><td class="align-left"><code>()</code></td><td class="align-left">Единственное значение «нет полезного результата»</td></tr><tr><td class="align-left"><code>never</code></td><td class="align-left">Нет значений</td><td class="align-left">Вычисление не возвращает результат</td></tr><tr><td class="align-left"><code>any</code></td><td class="align-left">Любое значение</td><td class="align-left">Тип, скрывающий конкретный тип данных</td></tr></tbody></table></div>
+<p>Для дробных чисел в учебных программах используйте десятичную точку: <code>2.0f</code>, <code>2.0d</code>. <code>float</code> и <code>double</code> хранят приближения: не все десятичные дроби представимы точно. Для переполнения <code>int</code> действуют правила JVM, поэтому язык не обещает автоматического увеличения разрядности.</p>
+<p>Аннотация <code>: тип</code> задаёт тип явно. Если её нет, компилятор выводит тип из значения:</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> count: <span class="tok-type">int</span> = <span class="tok-num">3</span>
+    <span class="tok-kw">const</span> price: <span class="tok-type">double</span> = <span class="tok-num">2.5d</span>
+    <span class="tok-kw">const</span> enabled: <span class="tok-type">bool</span> = <span class="tok-kw">true</span>
+    <span class="tok-kw">const</span> letter: <span class="tok-type">char</span> = <span class="tok-str">&#39;A&#39;</span>
+    <span class="tok-kw">const</span> title: <span class="tok-type">string</span> = <span class="tok-str">&quot;Ixion&quot;</span>
+    <span class="tok-kw">const</span> finished: <span class="tok-type">unit</span> = ()
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(count)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(price)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(enabled)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(letter)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(title)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(finished)
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">3
+2.5
+true
+A
+Ixion
+()</code></pre>
+</div>
+<p>Строки заключаются в двойные кавычки, <code>char</code> — в одинарные. <code>&quot;A&quot;</code> и <code>&#39;A&#39;</code> имеют разные типы. В строках можно использовать <code>\n</code> для переноса строки, <code>\t</code> для табуляции, <code>\&quot;</code> для кавычки и <code>\\</code> для обратной косой черты.</p>
+<p>Числа могут неявно расширяться в направлении <code>char → int → float → double</code>. Обратное преобразование автоматически не выполняется. Из-за точности <code>float</code> такое расширение не означает, что любое большое целое сохранится без округления.</p>
+<p><code>unit</code> удобно использовать как результат действия, например печати. <code>void</code> пока принимается как другое имя <code>unit</code>; в новом коде используйте <code>unit</code>. <code>never</code> нужен для функций, которые не возвращаются нормально, например <code>std::panic</code>. В обычных прикладных объявлениях новичку он требуется редко.</p>
+<h2 id="имена-const-и-var">Имена: const и var<a class="heading-anchor" href="#имена-const-и-var" aria-label="Ссылка на раздел">#</a></h2>
+<p>Привязка связывает имя со значением. Используйте <code>const</code>, если имя не требуется переприсваивать. <code>var</code> нужен для локального состояния, например счётчика.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> step = <span class="tok-num">2</span>
+    <span class="tok-kw">var</span> count = <span class="tok-num">1</span>
+    count = count + step
+    count += <span class="tok-num">3</span>
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(count)
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">6</code></pre>
+</div>
+<p><code>const</code> не означает «вычисляется при компиляции»: справа может стоять вызов функции. Он означает, что этому имени нельзя присвоить другое значение. Все привязки нужно инициализировать при объявлении.</p>
+<p><code>var</code> разрешает заменить значение целиком, но не делает его поля или элементы изменяемыми. Список <code>[1, 2]</code> остаётся неизменяемым и через <code>const</code>, и через <code>var</code>. Параметры функций, имена в шаблонах и переменная обхода <code>for</code> тоже неизменяемы.</p>
+<p>Объявляйте рабочие значения внутри функций. Инициализация модульных <code>const</code> ещё не завершена, а модульный <code>var</code> запрещён.</p>
+<h2 id="операторы-и-условия">Операторы и условия<a class="heading-anchor" href="#операторы-и-условия" aria-label="Ссылка на раздел">#</a></h2>
+<p>Основные операции:</p>
+<div class="table-wrap"><table><thead><tr><th class="align-left">Категория</th><th class="align-left">Операторы</th></tr></thead><tbody><tr><td class="align-left">Арифметика</td><td class="align-left"><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code></td></tr><tr><td class="align-left">Сравнения чисел</td><td class="align-left"><code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code></td></tr><tr><td class="align-left">Логика</td><td class="align-left"><code>!</code>, <code>&amp;&amp;</code>, <code>||</code>, <code>^</code> — XOR</td></tr><tr><td class="align-left">Присваивание локальному <code>var</code></td><td class="align-left"><code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code></td></tr><tr><td class="align-left">Соединение строк</td><td class="align-left"><code>+</code></td></tr></tbody></table></div>
+<p><code>*</code>, <code>/</code>, <code>%</code> выполняются раньше <code>+</code> и <code>-</code>; скобки позволяют явно задать порядок. Деление двух <code>int</code> отбрасывает дробную часть. Чтобы получить дробный результат, используйте дробные операнды. Деление целого числа на ноль — авария выполнения.</p>
+<p>Условие <code>if</code> должно иметь тип <code>bool</code>. Число или строка не превращаются в условие автоматически. <code>else if</code> добавляет другую проверку, <code>else</code> — оставшийся случай.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> age = <span class="tok-num">20</span>
+    <span class="tok-kw">const</span> hasTicket = <span class="tok-kw">true</span>
+    <span class="tok-kw">if</span> age &gt;= <span class="tok-num">18</span> &amp;&amp; hasTicket {
+        <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-str">&quot;Вход разрешён&quot;</span>)
+    } <span class="tok-kw">else</span> <span class="tok-kw">if</span> age &lt; <span class="tok-num">18</span> {
+        <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-str">&quot;Нужен сопровождающий&quot;</span>)
+    } <span class="tok-kw">else</span> {
+        <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-str">&quot;Нужен билет&quot;</span>)
+    }
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-num">7</span> / <span class="tok-num">2</span>)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-num">7.0d</span> / <span class="tok-num">2.0d</span>)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>((<span class="tok-num">2</span> + <span class="tok-num">3</span>) * <span class="tok-num">4</span>)
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">Вход разрешён
+3
+3.5
+20</code></pre>
+</div>
+<p><code>&amp;&amp;</code> не вычисляет правую часть, если слева <code>false</code>; <code>||</code> — если слева <code>true</code>. Это удобно для последовательных проверок. XOR <code>^</code> вычисляет оба аргумента.</p>
+<p><code>if</code> используется как оператор управления, а не как выражение для присваивания результата. Для выбора значения можно написать функцию с <code>return</code> или <code>case</code>. Сравнение целых и логических значений работает; строки удобно сравнивать через <code>strings::equals</code>. Структурное <code>==</code> для списков, структур, кортежей и ADT пока не реализовано.</p>
+<h2 id="функции">Функции<a class="heading-anchor" href="#функции" aria-label="Ссылка на раздел">#</a></h2>
+<p>Функция объединяет действия, которые можно вызывать по имени. После имени в скобках объявляются параметры, после <code>:</code> — тип результата.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">add</span>(left: <span class="tok-type">int</span>, right: <span class="tok-type">int</span>): <span class="tok-type">int</span> {
+    <span class="tok-kw">return</span> left + right
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">greet</span>(name: <span class="tok-type">string</span>): <span class="tok-type">unit</span> {
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-str">&quot;Привет, &quot;</span> + name)
+    <span class="tok-kw">return</span> ()
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-fn">greet</span>(<span class="tok-str">&quot;Маша&quot;</span>)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">add</span>(<span class="tok-num">4</span>, <span class="tok-num">5</span>))
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">Привет, Маша
+9</code></pre>
+</div>
+<p><code>left</code> и <code>right</code> — параметры, а <code>4</code> и <code>5</code> при вызове — аргументы. Число и типы аргументов должны соответствовать объявлению. Аргументы вычисляются слева направо.</p>
+<p><code>return</code> завершает текущую функцию и отдаёт значение вызывающему коду. У функции с полезным результатом каждый возможный нормально завершающийся путь должен возвращать значение. Последнее выражение обычного тела функции не заменяет <code>return</code>.</p>
+<p>Если тип результата не указан, функция считается возвращающей <code>unit</code>, а не выводит результат из последнего выражения. В такой функции допустимо закончить тело без <code>return</code>. Для явного пустого возврата пишите <code>return ()</code>. Не оставляйте одиночный <code>return</code>: следующая строка может стать его выражением.</p>
+<p>Функции могут обращаться к другим функциям, объявленным ниже, и вызывать себя. Рекурсия расходует стек; оптимизация хвостовых вызовов не обещается.</p>
+<h2 id="циклы">Циклы<a class="heading-anchor" href="#циклы" aria-label="Ссылка на раздел">#</a></h2>
+<h3 id="while">While<a class="heading-anchor" href="#while" aria-label="Ссылка на раздел">#</a></h3>
+<p><code>while</code> повторяет тело, пока условие истинно. Изменяйте данные так, чтобы цикл мог завершиться:</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">var</span> count = <span class="tok-num">0</span>
+    <span class="tok-kw">while</span> count &lt; <span class="tok-num">3</span> {
+        <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(count)
+        count += <span class="tok-num">1</span>
+    }
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">0
+1
+2</code></pre>
+</div>
+<h3 id="for">For<a class="heading-anchor" href="#for" aria-label="Ссылка на раздел">#</a></h3>
+<p><code>for имя : значение</code> последовательно обходит список или строку.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">var</span> total = <span class="tok-num">0</span>
+    <span class="tok-kw">for</span> value : [<span class="tok-num">2</span>, <span class="tok-num">4</span>, <span class="tok-num">6</span>] {
+        total += value
+    }
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(total)
+    <span class="tok-kw">for</span> letter : <span class="tok-str">&quot;ab&quot;</span> {
+        <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(letter)
+    }
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">12
+a
+b</code></pre>
+</div>
+<p>При обходе строки переменная имеет тип <code>char</code>. Это UTF-16 единица, поэтому некоторые символы, например эмодзи, занимают две позиции.</p>
+<p>Список для <code>for</code> вычисляется один раз перед обходом. Присваивание исходному имени другого списка внутри тела не меняет уже начатый обход. Переприсваивать само имя элемента <code>for</code> нельзя. <code>break</code> и <code>continue</code> в учебном ядре не поддерживаются. Для последовательностей чисел удобно сначала работать с явным списком; не переносите диапазоны и формы циклов из других языков без проверки.</p>
+<h2 id="неизменяемые-списки">Неизменяемые списки<a class="heading-anchor" href="#неизменяемые-списки" aria-label="Ссылка на раздел">#</a></h2>
+<p>Список содержит последовательность элементов одного типа. Тип списка целых — <code>int[]</code>, списка строк — <code>string[]</code>, вложенного списка целых — <code>int[][]</code>.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> original = [<span class="tok-num">1</span>, <span class="tok-num">2</span>]
+    <span class="tok-kw">const</span> extended = <span class="tok-ns">std</span>::<span class="tok-fn">append</span>(original, <span class="tok-num">3</span>)
+    <span class="tok-kw">const</span> joined = <span class="tok-ns">std</span>::<span class="tok-fn">concat</span>(extended, [<span class="tok-num">4</span>, <span class="tok-num">5</span>])
+    <span class="tok-kw">const</span> empty: <span class="tok-type">int</span>[] = []
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(original)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(extended)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(joined)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-ns">std</span>::<span class="tok-fn">len</span>(empty))
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">[1, 2]
+[1, 2, 3]
+[1, 2, 3, 4, 5]
+0</code></pre>
+</div>
+<p><code>append</code> и <code>concat</code> возвращают новые списки. Старая версия сохраняется, даже если на неё ссылаются несколько имён. Операций <code>push</code> и <code>pop</code> с изменением исходного списка нет; компилятор предлагает перейти на неизменяемый API.</p>
+<p>Для пустого <code>[]</code> нужен контекст, из которого известен тип элементов: аннотация <code>const xs: int[] = []</code>, аргумент функции или явная специализация. Запись <code>const xs = []</code> без такого контекста не подходит. Старая форма пустого значения <code>int[]</code> не рекомендуется; <code>int[]</code> в новом коде — прежде всего запись типа.</p>
+<p>Готовые списки инвариантны: <code>int[]</code> нельзя передать как <code>float[]</code> или <code>any[]</code>. Отдельный литерал может получить ожидаемый тип <code>float[]</code> и расширить элементы при создании: <code>const xs: float[] = [1, 2]</code>.</p>
+<h2 id="option-значение-может-отсутствовать">Option: значение может отсутствовать<a class="heading-anchor" href="#option-значение-может-отсутствовать" aria-label="Ссылка на раздел">#</a></h2>
+<p>Обращение к элементу списка может не найти значение. <code>Option[T]</code> явно описывает два исхода: <code>Option::Some(value)</code> содержит <code>T</code>, <code>Option::None</code> не содержит данных. <code>Option</code> предопределён, отдельный импорт для него не требуется.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">valueOr</span>(value: <span class="tok-type">Option</span>[<span class="tok-type">int</span>], fallback: <span class="tok-type">int</span>): <span class="tok-type">int</span> {
+    <span class="tok-kw">return</span> <span class="tok-kw">case</span> value {
+        <span class="tok-type">Option</span>::<span class="tok-type">Some</span>(number) =&gt; number,
+        <span class="tok-type">Option</span>::<span class="tok-type">None</span> =&gt; fallback,
+    }
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> numbers = [<span class="tok-num">10</span>, <span class="tok-num">20</span>]
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">valueOr</span>(numbers[<span class="tok-num">0</span>], -<span class="tok-num">1</span>))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">valueOr</span>(numbers[<span class="tok-num">2</span>], -<span class="tok-num">1</span>))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">valueOr</span>(<span class="tok-ns">std</span>::<span class="tok-fn">get</span>(numbers, -<span class="tok-num">1</span>), -<span class="tok-num">1</span>))
+    <span class="tok-kw">const</span> absent: <span class="tok-type">Option</span>[<span class="tok-type">int</span>] = <span class="tok-type">Option</span>::<span class="tok-type">None</span>
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">valueOr</span>(absent, <span class="tok-num">99</span>))
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">10
+-1
+-1
+99</code></pre>
+</div>
+<p>Индексы начинаются с нуля: у списка длины 2 допустимы 0 и 1. <code>numbers[index]</code> означает то же, что <code>std::get(numbers, index)</code>, и имеет тип <code>Option[int]</code>. Отрицательный индекс и выход за границы дают <code>None</code>. Неявного извлечения значения нет: сначала обработайте <code>Some</code> и <code>None</code>.</p>
+<p>Конструкция <code>case value { ... }</code> проверяет форму значения. В ветви <code>Option::Some(number)</code> имя <code>number</code> связывается с содержимым <code>Some</code>. Каждая ветвь заканчивается запятой. Подробнее шаблоны рассматриваются ниже.</p>
+<p><code>None</code> без данных не вызывают как функцию: пишите <code>Option::None</code>, а не <code>Option::None()</code>. Если нет ожидаемого типа, укажите его явно: <code>const absent = Option[int]::None</code>.</p>
+<h3 id="безопасное-обновление">Безопасное обновление<a class="heading-anchor" href="#безопасное-обновление" aria-label="Ссылка на раздел">#</a></h3>
+<p><code>std::updated</code> возвращает <code>Some</code> нового списка при допустимом индексе и <code>None</code> за границами. Исходный список сохраняется в обоих случаях.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> before = [<span class="tok-num">1</span>, <span class="tok-num">2</span>, <span class="tok-num">3</span>]
+    <span class="tok-kw">const</span> result = <span class="tok-ns">std</span>::<span class="tok-fn">updated</span>(before, <span class="tok-num">1</span>, <span class="tok-num">20</span>)
+    <span class="tok-kw">case</span> result {
+        <span class="tok-type">Option</span>::<span class="tok-type">Some</span>(after) =&gt; <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(after),
+        <span class="tok-type">Option</span>::<span class="tok-type">None</span> =&gt; <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-str">&quot;Индекс за границами&quot;</span>),
+    }
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(before)
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">[1, 20, 3]
+[1, 2, 3]</code></pre>
+</div>
+<p>Для вложенного списка каждый уровень индексации тоже возвращает <code>Option</code>. Сначала извлеките строку из <code>matrix[i]</code>, затем обработайте <code>row[j]</code>. Запись <code>matrix[i][j]</code> без обработки промежуточного <code>Option</code> не подходит.</p>
+<h2 id="функциональные-операции-со-списками">Функциональные операции со списками<a class="heading-anchor" href="#функциональные-операции-со-списками" aria-label="Ссылка на раздел">#</a></h2>
+<p>Вместо ручного цикла часто удобно описать преобразование функцией:</p>
+<ul><li><code>map</code> преобразует каждый элемент и возвращает список результатов.</li><li><code>filter</code> оставляет элементы, для которых проверка вернула <code>true</code>.</li><li><code>fold</code> накапливает один результат, начиная с заданного значения.</li></ul>
+<p>Здесь <code>lambda</code> создаёт небольшую функцию прямо в аргументе вызова.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> source = [<span class="tok-num">1</span>, <span class="tok-num">2</span>, <span class="tok-num">3</span>, <span class="tok-num">4</span>]
+    <span class="tok-kw">const</span> doubled = <span class="tok-ns">std</span>::<span class="tok-fn">map</span>(source, <span class="tok-kw">lambda</span> (value) { <span class="tok-kw">return</span> value * <span class="tok-num">2</span> })
+    <span class="tok-kw">const</span> selected = <span class="tok-ns">std</span>::<span class="tok-fn">filter</span>(doubled, <span class="tok-kw">lambda</span> (value) { <span class="tok-kw">return</span> value &gt; <span class="tok-num">4</span> })
+    <span class="tok-kw">const</span> total = <span class="tok-ns">std</span>::<span class="tok-fn">fold</span>(selected, <span class="tok-num">0</span>, <span class="tok-kw">lambda</span> (sum, value) { <span class="tok-kw">return</span> sum + value })
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(source)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(doubled)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(selected)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(total)
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">[1, 2, 3, 4]
+[2, 4, 6, 8]
+[6, 8]
+14</code></pre>
+</div>
+<p>В <code>fold</code> первый параметр функции — текущий аккумулятор, второй — очередной элемент. Для <code>selected = [6, 8]</code> вычисления идут так: <code>0 + 6</code>, затем <code>6 + 8</code>.</p>
+<p>Все три операции вызывают функцию слева направо ровно один раз на элемент. Пустой список не вызывает функцию; <code>fold</code> возвращает начальное значение. <code>filter</code> сохраняет взаимный порядок оставшихся элементов.</p>
+<div class="table-wrap"><table><thead><tr><th class="align-left">Вызов</th><th class="align-left">Тип результата</th></tr></thead><tbody><tr><td class="align-left"><code>std::len(xs)</code></td><td class="align-left"><code>int</code></td></tr><tr><td class="align-left"><code>std::append(xs, value)</code></td><td class="align-left"><code>T[]</code></td></tr><tr><td class="align-left"><code>std::concat(xs, ys)</code></td><td class="align-left"><code>T[]</code></td></tr><tr><td class="align-left"><code>std::get(xs, index)</code></td><td class="align-left"><code>Option[T]</code></td></tr><tr><td class="align-left"><code>std::updated(xs, index, value)</code></td><td class="align-left"><code>Option[T[]]</code></td></tr><tr><td class="align-left"><code>std::map(xs, f)</code></td><td class="align-left"><code>B[]</code>, если <code>f</code> преобразует <code>A</code> в <code>B</code></td></tr><tr><td class="align-left"><code>std::filter(xs, predicate)</code></td><td class="align-left"><code>T[]</code></td></tr><tr><td class="align-left"><code>std::fold(xs, initial, f)</code></td><td class="align-left">Тип аккумулятора</td></tr></tbody></table></div>
+<h2 id="структуры-и-обновление-with">Структуры и обновление with<a class="heading-anchor" href="#структуры-и-обновление-with" aria-label="Ссылка на раздел">#</a></h2>
+<p>Структура объединяет именованные поля. Например, точка содержит координаты <code>x</code> и <code>y</code>.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">type</span> <span class="tok-type">Point</span> = <span class="tok-kw">struct</span> {
+    x: <span class="tok-type">int</span>,
+    y: <span class="tok-type">int</span>,
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">moveRight</span>(point: <span class="tok-type">Point</span>): <span class="tok-type">Point</span> {
+    <span class="tok-kw">return</span> point <span class="tok-kw">with</span> { x = point.x + <span class="tok-num">1</span> }
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> original = <span class="tok-type">Point</span>(<span class="tok-num">2</span>, <span class="tok-num">5</span>)
+    <span class="tok-kw">const</span> moved = <span class="tok-fn">moveRight</span>(original)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(original.x)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(moved.x)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(moved.y)
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">2
+3
+5</code></pre>
+</div>
+<p><code>Point(2, 5)</code> вызывает конструктор; аргументы идут в порядке объявления полей. <code>point.x</code> читает поле. <code>with</code> создаёт новое значение, заменяя перечисленные поля и сохраняя остальные. База вычисляется один раз, новые значения — по порядку записи.</p>
+<p>Запись <code>point.x = 10</code> запрещена, в том числе если <code>point</code> объявлен через <code>var</code>. При необходимости перепривяжите имя: <code>point = point with { x = 10 }</code>.</p>
+<p>Структура подходит для данных, которые существуют одновременно: у точки есть и <code>x</code>, и <code>y</code>. Для выбора одной из нескольких форм используется <code>enum</code>.</p>
+<h2 id="кортежи">Кортежи<a class="heading-anchor" href="#кортежи" aria-label="Ссылка на раздел">#</a></h2>
+<p>Кортеж похож на небольшую структуру без имён полей. Он удобен для временного возврата нескольких значений. Тип <code>(int, string)</code> содержит целое и строку. Данные извлекаются шаблоном <code>case</code>.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">describe</span>(): (<span class="tok-type">int</span>, <span class="tok-type">string</span>) {
+    <span class="tok-kw">return</span> (<span class="tok-num">3</span>, <span class="tok-str">&quot;элемента&quot;</span>)
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> pair = <span class="tok-fn">describe</span>()
+    <span class="tok-kw">case</span> pair {
+        (count, label) =&gt; {
+            <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(count)
+            <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(label)
+        },
+    }
+    <span class="tok-kw">const</span> single = (<span class="tok-num">42</span>,)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-kw">case</span> single { (value,) =&gt; value, })
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">3
+элемента
+42</code></pre>
+</div>
+<p><code>(42)</code> — число в скобках, <code>(42,)</code> — одноэлементный кортеж, <code>()</code> — <code>unit</code>. Для долгоживущих данных со смысловыми полями обычно понятнее структура.</p>
+<h2 id="enum-несколько-форм-одного-типа">Enum: несколько форм одного типа<a class="heading-anchor" href="#enum-несколько-форм-одного-типа" aria-label="Ссылка на раздел">#</a></h2>
+<p><code>enum</code> описывает закрытый набор вариантов. Каждый вариант может иметь собственные данные. Такой тип называется алгебраическим типом данных, или ADT.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">type</span> <span class="tok-type">Delivery</span> = <span class="tok-kw">enum</span> {
+    <span class="tok-type">Pickup</span>,
+    <span class="tok-type">Courier</span>(address: <span class="tok-type">string</span>),
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">destination</span>(delivery: <span class="tok-type">Delivery</span>): <span class="tok-type">string</span> {
+    <span class="tok-kw">return</span> <span class="tok-kw">case</span> delivery {
+        <span class="tok-type">Delivery</span>::<span class="tok-type">Pickup</span> =&gt; <span class="tok-str">&quot;Самовывоз&quot;</span>,
+        <span class="tok-type">Delivery</span>::<span class="tok-type">Courier</span>(address) =&gt; address,
+    }
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">destination</span>(<span class="tok-type">Delivery</span>::<span class="tok-type">Pickup</span>))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">destination</span>(<span class="tok-type">Delivery</span>::<span class="tok-type">Courier</span>(<span class="tok-str">&quot;Лесная, 10&quot;</span>)))
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">Самовывоз
+Лесная, 10</code></pre>
+</div>
+<p>Значение <code>Delivery</code> находится ровно в одном варианте. У <code>Pickup</code> нет адреса, поэтому невозможно случайно прочитать его в этой ветви. У <code>Courier</code> адрес обязателен. Вариант без данных записывается без <code>()</code>, вариант с данными создаётся вызовом.</p>
+<p>В отличие от структуры поля разных вариантов не читаются общим обращением <code>delivery.address</code>. Сначала определите вариант через <code>case</code> и извлеките его поля. <code>Option[T]</code> и <code>Result[T, E]</code> устроены по этому же принципу.</p>
+<h3 id="рекурсивные-данные">Рекурсивные данные<a class="heading-anchor" href="#рекурсивные-данные" aria-label="Ссылка на раздел">#</a></h3>
+<p>Вариант может содержать значения своего же типа. Так описываются деревья:</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">type</span> <span class="tok-type">Expr</span> = <span class="tok-kw">enum</span> {
+    <span class="tok-type">Number</span>(value: <span class="tok-type">int</span>),
+    <span class="tok-type">Add</span>(left: <span class="tok-type">Expr</span>, right: <span class="tok-type">Expr</span>),
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">evaluate</span>(expression: <span class="tok-type">Expr</span>): <span class="tok-type">int</span> {
+    <span class="tok-kw">return</span> <span class="tok-kw">case</span> expression {
+        <span class="tok-type">Expr</span>::<span class="tok-type">Number</span>(value) =&gt; value,
+        <span class="tok-type">Expr</span>::<span class="tok-type">Add</span>(left, right) =&gt; <span class="tok-fn">evaluate</span>(left) + <span class="tok-fn">evaluate</span>(right),
+    }
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> expression = <span class="tok-type">Expr</span>::<span class="tok-type">Add</span>(<span class="tok-type">Expr</span>::<span class="tok-type">Number</span>(<span class="tok-num">2</span>), <span class="tok-type">Expr</span>::<span class="tok-type">Number</span>(<span class="tok-num">3</span>))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">evaluate</span>(expression))
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">5</code></pre>
+</div>
+<p>Здесь <code>Expr::Add</code> хранит два подвыражения, а <code>evaluate</code> разбирает дерево рекурсивно. Компилятор проверяет допустимость рекурсивных типов; рекурсия через аргументы функциональных полей имеет дополнительные ограничения положительности. Для начала используйте простые деревья через поля вариантов и списки.</p>
+<h2 id="case-и-шаблоны">Case и шаблоны<a class="heading-anchor" href="#case-и-шаблоны" aria-label="Ссылка на раздел">#</a></h2>
+<p><code>case</code> одновременно выбирает ветвь и может возвращать значение. Проверяемое выражение вычисляется один раз. Ветви проверяются сверху вниз; выполняется первая подходящая.</p>
+<h3 id="шаблоны">Шаблоны<a class="heading-anchor" href="#шаблоны" aria-label="Ссылка на раздел">#</a></h3>
+<div class="table-wrap"><table><thead><tr><th class="align-left">Шаблон</th><th class="align-left">Что означает</th></tr></thead><tbody><tr><td class="align-left"><code>_</code></td><td class="align-left">Любое значение без сохранения имени</td></tr><tr><td class="align-left"><code>value</code></td><td class="align-left">Любое значение с привязкой имени <code>value</code></td></tr><tr><td class="align-left"><code>0</code>, <code>true</code>, <code>&quot;ok&quot;</code>, <code>()</code></td><td class="align-left">Конкретный литерал</td></tr><tr><td class="align-left"><code>Option::Some(value)</code></td><td class="align-left">Вариант и его содержимое</td></tr><tr><td class="align-left"><code>Point { x: x, y: y }</code></td><td class="align-left">Поля структуры</td></tr><tr><td class="align-left"><code>(left, right)</code></td><td class="align-left">Компоненты кортежа</td></tr><tr><td class="align-left"><code>[]</code></td><td class="align-left">Пустой список</td></tr><tr><td class="align-left"><code>[first, second]</code></td><td class="align-left">Список ровно из двух элементов</td></tr><tr><td class="align-left"><code>[first, ..rest]</code></td><td class="align-left">Непустой список и неизменяемый хвост</td></tr><tr><td class="align-left"><code>int number</code></td><td class="align-left">Значение типа <code>int</code> и имя для него</td></tr></tbody></table></div>
+<p>Шаблон <code>value</code> создаёт новое имя, а не сравнивает с ранее объявленной переменной. Внутри одного шаблона нельзя привязать одно имя дважды. Привязки видны только в своей ветви и неизменяемы. <code>..rest</code> или <code>.._</code> допустимы только в конце списка.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">type</span> <span class="tok-type">Point</span> = <span class="tok-kw">struct</span> { x: <span class="tok-type">int</span>, y: <span class="tok-type">int</span> }
+
+<span class="tok-kw">def</span> <span class="tok-fn">firstOrZero</span>(values: <span class="tok-type">int</span>[]): <span class="tok-type">int</span> {
+    <span class="tok-kw">return</span> <span class="tok-kw">case</span> values {
+        [] =&gt; <span class="tok-num">0</span>,
+        [first, .._] =&gt; first,
+    }
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> point = <span class="tok-type">Point</span>(<span class="tok-num">4</span>, <span class="tok-num">5</span>)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-kw">case</span> point { <span class="tok-type">Point</span> { x: x, y: y } =&gt; x + y, })
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">firstOrZero</span>([<span class="tok-num">7</span>, <span class="tok-num">8</span>]))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">firstOrZero</span>([]))
+    <span class="tok-kw">const</span> value: <span class="tok-type">Result</span>[<span class="tok-type">Option</span>[<span class="tok-type">int</span>], <span class="tok-type">string</span>] = <span class="tok-type">Result</span>::<span class="tok-type">Ok</span>(<span class="tok-type">Option</span>::<span class="tok-type">Some</span>(<span class="tok-num">12</span>))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-kw">case</span> value {
+        <span class="tok-type">Result</span>::<span class="tok-type">Ok</span>(<span class="tok-type">Option</span>::<span class="tok-type">Some</span>(number)) =&gt; number,
+        <span class="tok-type">Result</span>::<span class="tok-type">Ok</span>(<span class="tok-type">Option</span>::<span class="tok-type">None</span>) =&gt; <span class="tok-num">0</span>,
+        <span class="tok-type">Result</span>::<span class="tok-type">Err</span>(_) =&gt; -<span class="tok-num">1</span>,
+    })
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">9
+7
+0
+12</code></pre>
+</div>
+<h3 id="дополнительные-условия-guards">Дополнительные условия: guards<a class="heading-anchor" href="#дополнительные-условия-guards" aria-label="Ссылка на раздел">#</a></h3>
+<p>После шаблона можно поставить <code>if</code> и логическое условие. Оно проверяется только после успешного шаблона и может пользоваться извлечёнными именами.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">classify</span>(value: <span class="tok-type">Option</span>[<span class="tok-type">int</span>]): <span class="tok-type">string</span> {
+    <span class="tok-kw">return</span> <span class="tok-kw">case</span> value {
+        <span class="tok-type">Option</span>::<span class="tok-type">Some</span>(number) <span class="tok-kw">if</span> number &gt; <span class="tok-num">0</span> =&gt; <span class="tok-str">&quot;Положительное&quot;</span>,
+        <span class="tok-type">Option</span>::<span class="tok-type">Some</span>(_) =&gt; <span class="tok-str">&quot;Ноль или отрицательное&quot;</span>,
+        <span class="tok-type">Option</span>::<span class="tok-type">None</span> =&gt; <span class="tok-str">&quot;Отсутствует&quot;</span>,
+    }
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">classify</span>(<span class="tok-type">Option</span>::<span class="tok-type">Some</span>(<span class="tok-num">3</span>)))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">classify</span>(<span class="tok-type">Option</span>::<span class="tok-type">Some</span>(<span class="tok-num">0</span>)))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">classify</span>(<span class="tok-type">Option</span>::<span class="tok-type">None</span>))
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">Положительное
+Ноль или отрицательное
+Отсутствует</code></pre>
+</div>
+<h3 id="полнота-и-недостижимые-ветви">Полнота и недостижимые ветви<a class="heading-anchor" href="#полнота-и-недостижимые-ветви" aria-label="Ссылка на раздел">#</a></h3>
+<p>Компилятор требует, чтобы <code>case</code> обработал все возможные значения. Для <code>Option</code> обычно нужны <code>Some</code> и <code>None</code>. Для чисел, строк и <code>any</code> часто нужна покрывающая ветвь <code>_</code> или привязка имени.</p>
+<p>Guard не гарантирует покрытие: после <code>Some(x) if x &gt; 0</code> остаются другие <code>Some</code>. Даже <code>if true</code> не учитывается как безусловное покрытие. Нельзя поставить <code>_</code> в начале, а затем добавлять другие ветви: они будут недостижимыми.</p>
+<p>Анализ может попросить добавить покрывающую ветвь в особенно сложном случае. Это проверка полноты, а не предложение молча проигнорировать данные: выбирайте осмысленное действие для оставшихся значений.</p>
+<h3 id="блоки-ветвей-и-return">Блоки ветвей и return<a class="heading-anchor" href="#блоки-ветвей-и-return" aria-label="Ссылка на раздел">#</a></h3>
+<p>Внутри ветви можно выполнить несколько действий. Последнее выражение блока становится результатом ветви. У обычной функции это правило не заменяет <code>return</code>.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">doubleOrZero</span>(value: <span class="tok-type">Option</span>[<span class="tok-type">int</span>]): <span class="tok-type">int</span> {
+    <span class="tok-kw">const</span> result = <span class="tok-kw">case</span> value {
+        <span class="tok-type">Option</span>::<span class="tok-type">Some</span>(number) =&gt; {
+            <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-str">&quot;Вычисляем&quot;</span>)
+            number * <span class="tok-num">2</span>
+        },
+        <span class="tok-type">Option</span>::<span class="tok-type">None</span> =&gt; { <span class="tok-kw">return</span> <span class="tok-num">0</span> },
+    }
+    <span class="tok-kw">return</span> result
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">doubleOrZero</span>(<span class="tok-type">Option</span>::<span class="tok-type">Some</span>(<span class="tok-num">4</span>)))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">doubleOrZero</span>(<span class="tok-type">Option</span>::<span class="tok-type">None</span>))
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">Вычисляем
+8
+0</code></pre>
+</div>
+<p><code>return</code> в ветви выходит из ближайшей функции или лямбды, а не только из <code>case</code>. Пустой блок и блок, оканчивающийся присваиванием, дают <code>unit</code>. Присваивание не является способом вернуть значение из ветви.</p>
+<h2 id="result-ожидаемые-ошибки">Result: ожидаемые ошибки<a class="heading-anchor" href="#result-ожидаемые-ошибки" aria-label="Ссылка на раздел">#</a></h2>
+<p><code>Result[T, E]</code> хранит успех <code>Result::Ok(value)</code> или ошибку <code>Result::Err(error)</code>. Тип ошибки <code>E</code> выбираете вы: это может быть строка или собственный ADT. В отличие от аварии выполнения, ошибка в <code>Result</code> остаётся обычным значением, которое вызывающий код может обработать через <code>case</code>.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">divide</span>(left: <span class="tok-type">int</span>, right: <span class="tok-type">int</span>): <span class="tok-type">Result</span>[<span class="tok-type">int</span>, <span class="tok-type">string</span>] {
+    <span class="tok-kw">if</span> right == <span class="tok-num">0</span> {
+        <span class="tok-kw">return</span> <span class="tok-type">Result</span>::<span class="tok-type">Err</span>(<span class="tok-str">&quot;Нельзя делить на ноль&quot;</span>)
+    }
+    <span class="tok-kw">return</span> <span class="tok-type">Result</span>::<span class="tok-type">Ok</span>(left / right)
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">show</span>(result: <span class="tok-type">Result</span>[<span class="tok-type">int</span>, <span class="tok-type">string</span>]): <span class="tok-type">unit</span> {
+    <span class="tok-kw">case</span> result {
+        <span class="tok-type">Result</span>::<span class="tok-type">Ok</span>(value) =&gt; <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(value),
+        <span class="tok-type">Result</span>::<span class="tok-type">Err</span>(message) =&gt; <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(message),
+    }
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-fn">show</span>(<span class="tok-fn">divide</span>(<span class="tok-num">10</span>, <span class="tok-num">2</span>))
+    <span class="tok-fn">show</span>(<span class="tok-fn">divide</span>(<span class="tok-num">10</span>, <span class="tok-num">0</span>))
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">5
+Нельзя делить на ноль</code></pre>
+</div>
+<p><code>Option</code> подходит, когда важно только наличие значения; <code>Result</code> — когда нужно объяснить неуспех. Никакое автоматическое распространение ошибки через <code>?</code> пока не предусмотрено: используйте <code>case</code>.</p>
+<p><code>std::panic(&quot;сообщение&quot;)</code> предназначен для аварийного завершения, а не для обычного ожидаемого отказа. Если отсутствие данных — нормальная ситуация, верните <code>Option</code>; если есть причина ошибки — <code>Result</code>.</p>
+<h2 id="обобщённые-типы-и-функции">Обобщённые типы и функции<a class="heading-anchor" href="#обобщённые-типы-и-функции" aria-label="Ссылка на раздел">#</a></h2>
+<p>Обобщение, или generic, позволяет писать один тип или одну функцию для разных типов данных. Параметр типа записывается в квадратных скобках после имени.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">type</span> <span class="tok-type">Box</span>[<span class="tok-type">T</span>] = <span class="tok-kw">struct</span> { value: <span class="tok-type">T</span> }
+<span class="tok-kw">type</span> <span class="tok-type">Pair</span>[<span class="tok-type">A</span>, <span class="tok-type">B</span>] = (<span class="tok-type">A</span>, <span class="tok-type">B</span>)
+<span class="tok-kw">type</span> <span class="tok-type">UserName</span> = <span class="tok-type">string</span>
+
+<span class="tok-kw">def</span> identity[<span class="tok-type">T</span>](value: <span class="tok-type">T</span>): <span class="tok-type">T</span> {
+    <span class="tok-kw">return</span> value
+}
+
+<span class="tok-kw">def</span> wrap[<span class="tok-type">T</span>](value: <span class="tok-type">T</span>): <span class="tok-type">Option</span>[<span class="tok-type">T</span>] {
+    <span class="tok-kw">return</span> <span class="tok-type">Option</span>::<span class="tok-type">Some</span>(value)
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> box: <span class="tok-type">Box</span>[<span class="tok-type">int</span>] = <span class="tok-type">Box</span>(<span class="tok-num">42</span>)
+    <span class="tok-kw">const</span> name: <span class="tok-type">UserName</span> = <span class="tok-fn">identity</span>(<span class="tok-str">&quot;Аня&quot;</span>)
+    <span class="tok-kw">const</span> pair: <span class="tok-type">Pair</span>[<span class="tok-type">int</span>, <span class="tok-type">string</span>] = (box.value, name)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(identity[<span class="tok-type">int</span>](box.value))
+    <span class="tok-kw">case</span> pair { (number, text) =&gt; <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(text), }
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-kw">case</span> <span class="tok-fn">wrap</span>(<span class="tok-num">7</span>) { <span class="tok-type">Option</span>::<span class="tok-type">Some</span>(value) =&gt; value, <span class="tok-type">Option</span>::<span class="tok-type">None</span> =&gt; <span class="tok-num">0</span>, })
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">42
+Аня
+7</code></pre>
+</div>
+<p><code>T</code>, <code>A</code>, <code>B</code> — имена параметров типа, а не ключевые слова. <code>Box[int]</code> и <code>Box[string]</code> — разные конкретные типы. Число аргументов типа должно совпадать с объявлением. Generic-параметры указываются после имени: <code>type Box[T] = struct { ... }</code>, <code>def identity[T](...)</code>.</p>
+<p>Часто компилятор выводит аргументы типов из данных или ожидаемого результата. Если информации недостаточно, укажите тип явно, как у <code>Option[int]::None</code>. Generic-функция должна работать для произвольного <code>T</code>: нельзя написать <code>value + 1</code> для неограниченного <code>T</code>, считая, что при каждом вызове это окажется число.</p>
+<p><code>type UserName = string</code> создаёт alias — другое имя существующего типа. Новая структура или <code>enum</code>, напротив, создают собственный номинальный тип: две разные структуры с одинаковыми полями не становятся одним типом.</p>
+<h2 id="лямбды-и-функции-как-значения">Лямбды и функции как значения<a class="heading-anchor" href="#лямбды-и-функции-как-значения" aria-label="Ссылка на раздел">#</a></h2>
+<p>Лямбда — функция без отдельного объявления <code>def</code>. Её можно сохранить и передать другой функции. Тип <code>(int) =&gt; int</code> читается «функция из одного <code>int</code> в <code>int</code>»; <code>(int, int) =&gt; int</code> принимает два аргумента, <code>() =&gt; int</code> — ни одного.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">applyTwice</span>(value: <span class="tok-type">int</span>, f: (<span class="tok-type">int</span>) =&gt; <span class="tok-type">int</span>): <span class="tok-type">int</span> {
+    <span class="tok-kw">return</span> <span class="tok-fn">f</span>(<span class="tok-fn">f</span>(value))
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> increment: (<span class="tok-type">int</span>) =&gt; <span class="tok-type">int</span> = <span class="tok-kw">lambda</span> (value) { <span class="tok-kw">return</span> value + <span class="tok-num">1</span> }
+    <span class="tok-kw">const</span> <span class="tok-type">double</span> = <span class="tok-kw">lambda</span> (value: <span class="tok-type">int</span>): <span class="tok-type">int</span> { <span class="tok-kw">return</span> value * <span class="tok-num">2</span> }
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">applyTwice</span>(<span class="tok-num">3</span>, increment))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-type">double</span>(<span class="tok-num">4</span>))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-ns">std</span>::<span class="tok-fn">map</span>([<span class="tok-num">1</span>, <span class="tok-num">2</span>], increment))
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">5
+8
+[2, 3]</code></pre>
+</div>
+<p>Типы параметров можно опускать, если известен ожидаемый функциональный тип, например из аннотации или сигнатуры <code>map</code>. Результат лямбды также может выводиться. Если контекста нет, укажите типы параметров явно. Как и у <code>def</code>, полезный результат возвращается через <code>return</code>.</p>
+<h3 id="захват-по-значению">Захват по значению<a class="heading-anchor" href="#захват-по-значению" aria-label="Ссылка на раздел">#</a></h3>
+<p>Лямбда может использовать имена снаружи, но захватывает их значения в момент своего создания:</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">var</span> number = <span class="tok-num">1</span>
+    <span class="tok-kw">const</span> read: () =&gt; <span class="tok-type">int</span> = <span class="tok-kw">lambda</span> () { <span class="tok-kw">return</span> number }
+    number = <span class="tok-num">2</span>
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(number)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">read</span>())
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">2
+1</code></pre>
+</div>
+<p>Менять захваченное имя внутри лямбды нельзя. Если нужен локальный счётчик самой лямбды, объявите в её теле собственный <code>var</code>. Это правило помогает читать преобразования списков: результат не зависит от незаметного изменения захваченных привязок в процессе обхода.</p>
+<h2 id="объединения-типов-и-any">Объединения типов и any<a class="heading-anchor" href="#объединения-типов-и-any" aria-label="Ссылка на раздел">#</a></h2>
+<p>Тип <code>int | string</code> означает «целое или строка». Разобрать конкретную альтернативу можно типовым шаблоном. Для бизнес-моделей с собственным смыслом вариантов обычно понятнее именованный <code>enum</code>.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">type</span> <span class="tok-type">Label</span> = <span class="tok-type">int</span> | <span class="tok-type">string</span>
+
+<span class="tok-kw">def</span> <span class="tok-fn">describe</span>(value: <span class="tok-type">Label</span>): <span class="tok-type">string</span> {
+    <span class="tok-kw">return</span> <span class="tok-kw">case</span> value {
+        <span class="tok-type">int</span> number =&gt; <span class="tok-str">&quot;Числовая метка&quot;</span>,
+        <span class="tok-type">string</span> text =&gt; text,
+    }
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">describe</span>(<span class="tok-num">42</span>))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">describe</span>(<span class="tok-str">&quot;Готово&quot;</span>))
+    <span class="tok-kw">const</span> hidden: <span class="tok-type">any</span> = <span class="tok-type">Option</span>::<span class="tok-type">Some</span>(<span class="tok-num">5</span>)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-kw">case</span> hidden {
+        <span class="tok-type">Option</span>[<span class="tok-type">int</span>] value =&gt; <span class="tok-kw">case</span> value { <span class="tok-type">Option</span>::<span class="tok-type">Some</span>(x) =&gt; x, <span class="tok-type">Option</span>::<span class="tok-type">None</span> =&gt; <span class="tok-num">0</span>, },
+        _ =&gt; -<span class="tok-num">1</span>,
+    })
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">Числовая метка
+Готово
+5</code></pre>
+</div>
+<p><code>any</code> принимает значение любого типа, но скрывает доступные операции. Перед арифметикой или чтением полей нужно уточнить форму/тип через <code>case</code>. Для <code>any</code> нужна покрывающая ветвь: набор из нескольких известных типов не перечисляет все возможные значения.</p>
+<p>Не используйте <code>any</code> вместо generic-параметра, если функция должна сохранить тип входа в результате. В <code>identity[T](value: T): T</code> эта связь известна; в функции с входом и выходом <code>any</code> — потеряна.</p>
+<p>Сопоставление generic-объединений, альтернативы которых могут совпасть после подстановки, например <code>T | int</code>, пока ограничено. Используйте отдельные варианты своего <code>enum</code> либо покрывающий шаблон.</p>
+<h2 id="модули-и-несколько-файлов">Модули и несколько файлов<a class="heading-anchor" href="#модули-и-несколько-файлов" aria-label="Ссылка на раздел">#</a></h2>
+<p>Модуль — отдельный исходный файл. <code>pub</code> делает объявление доступным извне, а <code>use &lt;путь&gt;</code> подключает модуль. Последняя часть пути становится его квалификатором.</p>
+<p>Создайте в корне проекта каталог <code>domain</code> и файл <code>domain/pricing.ix</code>:</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">pub</span> <span class="tok-kw">type</span> <span class="tok-type">Price</span> = <span class="tok-kw">struct</span> { amount: <span class="tok-type">int</span> }
+
+<span class="tok-kw">pub</span> <span class="tok-kw">def</span> <span class="tok-fn">addTax</span>(price: <span class="tok-type">Price</span>): <span class="tok-type">Price</span> {
+    <span class="tok-kw">return</span> price <span class="tok-kw">with</span> { amount = price.amount + <span class="tok-num">2</span> }
+}</code></pre>
+</div>
+<p>В <code>hello.ix</code> разместите:</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+<span class="tok-kw">use</span> &lt;domain/pricing&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> price: pricing::<span class="tok-type">Price</span> = pricing::<span class="tok-type">Price</span>(<span class="tok-num">10</span>)
+    <span class="tok-kw">const</span> result = pricing::<span class="tok-fn">addTax</span>(price)
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(result.amount)
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">12</code></pre>
+</div>
+<p>Запускайте <code>hello.ix</code> из корня, где находится каталог <code>domain</code>. <code>pricing::Price</code> — экспортированный тип и его конструктор, <code>pricing::addTax</code> — экспортированная функция. Внутри модуля свои имена используются без квалификатора.</p>
+<p>Экспортированный <code>enum</code> открывает свои варианты: обращение имеет вид <code>module::Type::Variant(...)</code>. Его тип с параметрами пишется <code>module::Type[int]</code>. Публичная сигнатура не должна раскрывать приватный номинальный тип; экспортируйте используемый тип через <code>pub type</code>.</p>
+<p>Локальное имя, объявленное внутри блока, не видно после этого блока. Переменные ветвей <code>case</code> тоже не выходят за свои ветви. Избегайте повторного использования одинаковых имён без необходимости — так учебный код легче читать.</p>
+<h2 id="стандартные-модули">Стандартные модули<a class="heading-anchor" href="#стандартные-модули" aria-label="Ссылка на раздел">#</a></h2>
+<h3 id="args-и-fs-аргументы-программы-и-файлы">Args и fs: аргументы программы и файлы<a class="heading-anchor" href="#args-и-fs-аргументы-программы-и-файлы" aria-label="Ссылка на раздел">#</a></h3>
+<p><code>use &lt;args&gt;</code> предоставляет аргументы, переданные после имени <code>.ix</code>-файла: <code>args::count()</code> возвращает их количество, <code>args::get(index)</code> — значение по нулевому индексу или пустую строку, если индекс вне диапазона.</p>
+<p><code>use &lt;fs&gt;</code> предоставляет операции для CLI-инструментов: <code>exists(path)</code>, <code>isSimpleName(value)</code>, <code>isDirectory(path)</code>, <code>readText(path)</code>, <code>writeText(path, contents)</code>, <code>createDirectories(path)</code>, <code>copyFile(source, destination)</code>, <code>copyTree(source, destination)</code>, <code>list(path)</code> и <code>join(left, right)</code>. <code>list</code> возвращает имена непосредственных элементов каталога одной строкой на элемент. Ошибки чтения и записи приводят к runtime-ошибке; проверяйте путь через <code>exists</code>/<code>isDirectory</code>, если ошибка ожидаема.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+<span class="tok-kw">use</span> &lt;<span class="tok-ns">args</span>&gt;
+<span class="tok-kw">use</span> &lt;<span class="tok-ns">fs</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">if</span> <span class="tok-ns">args</span>::<span class="tok-fn">count</span>() &gt; <span class="tok-num">0</span> {
+        <span class="tok-kw">const</span> file = <span class="tok-ns">args</span>::<span class="tok-fn">get</span>(<span class="tok-num">0</span>)
+        <span class="tok-kw">if</span> <span class="tok-ns">fs</span>::<span class="tok-fn">exists</span>(file) { <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-ns">fs</span>::<span class="tok-fn">readText</span>(file)) }
+    }
+}</code></pre>
+</div>
+<h3 id="std-вывод-и-работа-с-данными">Std: вывод и работа с данными<a class="heading-anchor" href="#std-вывод-и-работа-с-данными" aria-label="Ссылка на раздел">#</a></h3>
+<p><code>use &lt;std&gt;</code> подключает <code>std::print</code>, <code>std::println</code>, <code>std::len</code> и функциональный API списков. <code>print</code> не добавляет перенос строки; <code>println</code> добавляет. <code>len</code> поддерживает список и строку. Печатать можно любые значения, но представление структур и ADT предназначено для диагностики, а не для сохранения данных в файл.</p>
+<p><code>std::readLine</code> присутствует в текущем runtime, но его nullable JVM-контракт ещё не переведён на безопасный <code>Option</code>. Это не образец нового API; учебные программы пока используют заранее заданные входные данные.</p>
+<h3 id="strings-преобразование-текста">Strings: преобразование текста<a class="heading-anchor" href="#strings-преобразование-текста" aria-label="Ссылка на раздел">#</a></h3>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+<span class="tok-kw">use</span> &lt;<span class="tok-ns">strings</span>&gt;
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-ns">strings</span>::<span class="tok-fn">toUpperCase</span>(<span class="tok-str">&quot;hello&quot;</span>))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-ns">strings</span>::<span class="tok-fn">toLowerCase</span>(<span class="tok-str">&quot;IXION&quot;</span>))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-ns">strings</span>::<span class="tok-fn">toTitleCase</span>(<span class="tok-str">&quot;hello world&quot;</span>))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-ns">strings</span>::<span class="tok-fn">equals</span>(<span class="tok-str">&quot;ok&quot;</span>, <span class="tok-str">&quot;ok&quot;</span>))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-ns">std</span>::<span class="tok-fn">len</span>(<span class="tok-str">&quot;abc&quot;</span>))
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">HELLO
+ixion
+Hello World
+true
+3</code></pre>
+</div>
+<p>Есть функции <code>toUpperCase</code>, <code>toLowerCase</code>, <code>toTitleCase</code> и <code>equals</code>. Строки не меняются на месте. <code>toTitleCase</code> обрабатывает слова, разделённые пробелами; не считайте её универсальным языковым редактором текста.</p>
+<p>Строковая индексация пока сохраняет прежний контракт: <code>text[index]</code> возвращает односимвольную строку и может аварийно завершиться за границами. Она отличается от безопасной индексации <strong>списков</strong>, возвращающей <code>Option[T]</code>. Проверяйте границы заранее или используйте <code>for</code> для последовательного обхода.</p>
+<h3 id="http-сетевые-запросы">Http: сетевые запросы<a class="heading-anchor" href="#http-сетевые-запросы" aria-label="Ссылка на раздел">#</a></h3>
+<p><code>use &lt;http&gt;</code> открывает функции модуля HTTP. Он вызывает внешнюю систему, поэтому результат зависит от сети; такие вызовы не входят в воспроизводимые учебные примеры выше.</p>
+<div class="table-wrap"><table><thead><tr><th class="align-left">Функция</th><th class="align-left">Аргументы</th><th class="align-left">Результат</th></tr></thead><tbody><tr><td class="align-left"><code>get</code>, <code>delete</code></td><td class="align-left"><code>url: string</code></td><td class="align-left">Тело ответа <code>string</code></td></tr><tr><td class="align-left"><code>post</code>, <code>put</code>, <code>patch</code></td><td class="align-left"><code>url: string, body: string</code></td><td class="align-left">Тело ответа <code>string</code></td></tr><tr><td class="align-left"><code>request</code></td><td class="align-left"><code>method: string, url: string, body: string</code></td><td class="align-left">Тело ответа <code>string</code></td></tr><tr><td class="align-left"><code>status</code></td><td class="align-left"><code>method: string, url: string, body: string</code></td><td class="align-left">HTTP-код <code>int</code></td></tr><tr><td class="align-left"><code>urlEncode</code></td><td class="align-left"><code>value: string</code></td><td class="align-left">Кодированная строка</td></tr></tbody></table></div>
+<p>Например, вызов имеет вид <code>http::get(&quot;https://example.com&quot;)</code>. Текущее имя функции статуса — <code>status</code>, а не <code>requestStatus</code> из старого руководства. Модуль пока не оборачивает сетевые исключения в <code>Result</code> автоматически.</p>
+<h3 id="async-фоновые-действия">Async: фоновые действия<a class="heading-anchor" href="#async-фоновые-действия" aria-label="Ссылка на раздел">#</a></h3>
+<p><code>use &lt;async&gt;</code> предоставляет запуск лямбды в отдельном потоке. <code>async::run</code> принимает лямбду без аргументов и возвращает идентификатор задачи <code>int</code>. Для действия используйте лямбду с результатом <code>unit</code>.</p>
+<div class="table-wrap"><table><thead><tr><th class="align-left">Функция</th><th class="align-left">Действие</th></tr></thead><tbody><tr><td class="align-left"><code>run(task)</code></td><td class="align-left">Запустить действие в фоне</td></tr><tr><td class="align-left"><code>runDelayed(delayMs, task)</code></td><td class="align-left">Запустить после задержки</td></tr><tr><td class="align-left"><code>isRunning(taskId)</code></td><td class="align-left">Проверить, работает ли поток</td></tr><tr><td class="align-left"><code>await(taskId)</code></td><td class="align-left">Дождаться завершения</td></tr><tr><td class="align-left"><code>cancel(taskId)</code></td><td class="align-left">Запросить прерывание потока</td></tr><tr><td class="align-left"><code>sleep(ms)</code></td><td class="align-left">Приостановить текущий поток</td></tr></tbody></table></div>
+<p>Неизменяемые данные и захват по значению не превращают весь ввод-вывод в чистые вычисления. Порядок вывода из разных потоков не фиксирован, а внешние ресурсы требуют отдельной дисциплины. Изучайте async после обычных функций и лямбд.</p>
+<h2 id="учебный-проект-список-задач">Учебный проект: список задач<a class="heading-anchor" href="#учебный-проект-список-задач" aria-label="Ссылка на раздел">#</a></h2>
+<p>Соберём несколько возможностей в одной программе. Задача содержит название и состояние. Завершение задачи возвращает новую структуру, а завершение списка — новый список. Поиск первого элемента учитывает возможность пустого списка.</p>
+<div class="code-block" data-lang="ixion">
+  <div class="code-block-bar">
+    <span class="code-lang">Ixion</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-ixion"><span class="tok-kw">use</span> &lt;<span class="tok-ns">std</span>&gt;
+
+<span class="tok-kw">type</span> <span class="tok-type">Status</span> = <span class="tok-kw">enum</span> { <span class="tok-type">Open</span>, <span class="tok-type">Done</span>, }
+<span class="tok-kw">type</span> <span class="tok-type">Task</span> = <span class="tok-kw">struct</span> { title: <span class="tok-type">string</span>, status: <span class="tok-type">Status</span> }
+
+<span class="tok-kw">def</span> <span class="tok-fn">complete</span>(task: <span class="tok-type">Task</span>): <span class="tok-type">Task</span> {
+    <span class="tok-kw">return</span> task <span class="tok-kw">with</span> { status = <span class="tok-type">Status</span>::<span class="tok-type">Done</span> }
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">isDone</span>(task: <span class="tok-type">Task</span>): <span class="tok-type">bool</span> {
+    <span class="tok-kw">return</span> <span class="tok-kw">case</span> task.status {
+        <span class="tok-type">Status</span>::<span class="tok-type">Open</span> =&gt; <span class="tok-kw">false</span>,
+        <span class="tok-type">Status</span>::<span class="tok-type">Done</span> =&gt; <span class="tok-kw">true</span>,
+    }
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">countDone</span>(tasks: <span class="tok-type">Task</span>[]): <span class="tok-type">int</span> {
+    <span class="tok-kw">return</span> <span class="tok-ns">std</span>::<span class="tok-fn">fold</span>(tasks, <span class="tok-num">0</span>, <span class="tok-kw">lambda</span> (count, task) {
+        <span class="tok-kw">return</span> count + <span class="tok-kw">case</span> task.status {
+            <span class="tok-type">Status</span>::<span class="tok-type">Open</span> =&gt; <span class="tok-num">0</span>,
+            <span class="tok-type">Status</span>::<span class="tok-type">Done</span> =&gt; <span class="tok-num">1</span>,
+        }
+    })
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">firstTitle</span>(tasks: <span class="tok-type">Task</span>[]): <span class="tok-type">Option</span>[<span class="tok-type">string</span>] {
+    <span class="tok-kw">return</span> <span class="tok-kw">case</span> tasks[<span class="tok-num">0</span>] {
+        <span class="tok-type">Option</span>::<span class="tok-type">Some</span>(task) =&gt; <span class="tok-type">Option</span>::<span class="tok-type">Some</span>(task.title),
+        <span class="tok-type">Option</span>::<span class="tok-type">None</span> =&gt; <span class="tok-type">Option</span>::<span class="tok-type">None</span>,
+    }
+}
+
+<span class="tok-kw">def</span> <span class="tok-fn">main</span>() {
+    <span class="tok-kw">const</span> tasks = [
+        <span class="tok-type">Task</span>(<span class="tok-str">&quot;Изучить const&quot;</span>, <span class="tok-type">Status</span>::<span class="tok-type">Done</span>),
+        <span class="tok-type">Task</span>(<span class="tok-str">&quot;Разобраться с case&quot;</span>, <span class="tok-type">Status</span>::<span class="tok-type">Open</span>)
+    ]
+    <span class="tok-kw">const</span> completed = <span class="tok-ns">std</span>::<span class="tok-fn">map</span>(tasks, <span class="tok-kw">lambda</span> (task) { <span class="tok-kw">return</span> <span class="tok-fn">complete</span>(task) })
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">countDone</span>(tasks))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-fn">countDone</span>(completed))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-ns">std</span>::<span class="tok-fn">len</span>(<span class="tok-ns">std</span>::<span class="tok-fn">filter</span>(tasks, <span class="tok-kw">lambda</span> (task) { <span class="tok-kw">return</span> <span class="tok-fn">isDone</span>(task) })))
+    <span class="tok-ns">std</span>::<span class="tok-fn">println</span>(<span class="tok-kw">case</span> <span class="tok-fn">firstTitle</span>(tasks) {
+        <span class="tok-type">Option</span>::<span class="tok-type">Some</span>(title) =&gt; title,
+        <span class="tok-type">Option</span>::<span class="tok-type">None</span> =&gt; <span class="tok-str">&quot;Задач пока нет&quot;</span>,
+    })
+}</code></pre>
+</div>
+<p>Вывод:</p>
+<div class="code-block code-block-output" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Вывод</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">1
+2
+1
+Изучить const</code></pre>
+</div>
+<p>Обратите внимание на <code>tasks</code> и <code>completed</code>: старые данные остались доступными. Состояние задачи разбирается через варианты, а отсутствие первой задачи — через <code>Option</code>. Изменение данных выражено возвращаемыми значениями функций.</p>
+<h2 id="частые-ошибки">Частые ошибки<a class="heading-anchor" href="#частые-ошибки" aria-label="Ссылка на раздел">#</a></h2>
+<h3 id="нельзя-присвоить-const">«Нельзя присвоить const»<a class="heading-anchor" href="#нельзя-присвоить-const" aria-label="Ссылка на раздел">#</a></h3>
+<p>Если нужно переприсваивание, используйте локальный <code>var</code>. Для коллекции или структуры создавайте новое значение: замена <code>const</code> на <code>var</code> не разрешает запись в поле или индекс.</p>
+<h3 id="не-удаётся-вывести-тип">«Не удаётся вывести тип»<a class="heading-anchor" href="#не-удаётся-вывести-тип" aria-label="Ссылка на раздел">#</a></h3>
+<p>Частые причины — пустой список и вариант без данных. Добавьте контекст:</p>
+<div class="code-block" data-lang="text">
+  <div class="code-block-bar">
+    <span class="code-lang">Текст</span>
+    <button class="code-copy" type="button" aria-label="Копировать" data-copied-label="Скопировано" data-failed-label="Не удалось">Копировать</button>
+  </div>
+  <pre tabindex="0"><code class="language-text">const values: int[] = []
+const absent: Option[int] = Option::None
+const another = Option[string]::None</code></pre>
+</div>
+<p>Не заменяйте неизвестный тип на <code>any</code> автоматически: так легко потерять полезные проверки и перенести ошибку на последующую обработку.</p>
+<h3 id="case-не-покрывает-все-значения">«Case не покрывает все значения»<a class="heading-anchor" href="#case-не-покрывает-все-значения" aria-label="Ссылка на раздел">#</a></h3>
+<p>Добавьте пропущенный вариант. Для <code>Option</code> проверьте наличие <code>None</code>, для списков — пустого <code>[]</code>. Если есть guard, добавьте ветвь без него для остальных значений. Диагностика <code>match.non_exhaustive</code> может показывать пример пропущенного шаблона.</p>
+<h3 id="недостижимая-ветвь">«Недостижимая ветвь»<a class="heading-anchor" href="#недостижимая-ветвь" aria-label="Ссылка на раздел">#</a></h3>
+<p>Уберите повторный шаблон или перенесите широкую ветвь <code>_</code> вниз. Проверка <code>match.unreachable</code> означает, что предыдущие ветви уже покрывают эту область.</p>
+<h3 id="ожидался-int-получен-optionint">«Ожидался int, получен Option[int]»<a class="heading-anchor" href="#ожидался-int-получен-optionint" aria-label="Ссылка на раздел">#</a></h3>
+<p>Индексация списка не возвращает элемент напрямую. Разберите результат через <code>case</code>, как в разделе <code>Option</code>. Аналогично <code>updated</code> возвращает <code>Option[T[]]</code>.</p>
+<h3 id="функция-не-всегда-возвращает-значение">«Функция не всегда возвращает значение»<a class="heading-anchor" href="#функция-не-всегда-возвращает-значение" aria-label="Ссылка на раздел">#</a></h3>
+<p>Проверьте каждый путь <code>if</code>/<code>else</code>. Используйте <code>return выражение</code>; последнее выражение обычного тела функции не считается возвратом. Для функции-действия можно выбрать результат <code>unit</code>.</p>
+<h3 id="готовый-int-не-подходит-вместо-float">«Готовый int[] не подходит вместо float[]»<a class="heading-anchor" href="#готовый-int-не-подходит-вместо-float" aria-label="Ссылка на раздел">#</a></h3>
+<p>Параметризованные данные инвариантны. При необходимости создайте новый список через <code>map</code> с ожидаемым результатом, например специализацию <code>std::map[int, float]</code>. Не путайте преобразование нового литерала с переинтерпретацией готового списка.</p>
+<h3 id="ошибки-запуска">Ошибки запуска<a class="heading-anchor" href="#ошибки-запуска" aria-label="Ссылка на раздел">#</a></h3>
+<ul><li><code>Unsupported class file</code> или несовместимость Gradle/JDK: проверьте <code>JAVA_HOME</code> и запустите сборку на JDK 21.</li><li><code>ClassNotFoundException</code> при самостоятельном запуске JAR: используйте документационный Gradle-скрипт, который собирает runtime classpath.</li><li>Файл или модуль не найден: проверьте текущий каталог, регистр имён и путь <code>use &lt;domain/pricing&gt;</code> относительно корня проекта.</li><li>Непонятная ошибка разбора: проверьте запятые, парность скобок и наличие выражения после <code>return</code>.</li></ul>
+<p>При сообщении об ошибке сохраняйте минимальный исходник, полный текст диагностики, версию JDK и команду запуска. Это помогает отличить ошибку программы от ограничения или дефекта компилятора.</p>
+<h2 id="ограничения-текущей-версии">Ограничения текущей версии<a class="heading-anchor" href="#ограничения-текущей-версии" aria-label="Ссылка на раздел">#</a></h2>
+<p>Реализованы JVM- и Java-исполнение нового ядра, неизменяемые произведения и списки, generic/рекурсивные ADT, <code>Option</code>/<code>Result</code>, вложенные шаблоны, guards и проверка полноты. При этом работа над целевой редакцией продолжается:</p>
+<ul><li>Структурное равенство и хеширование данных ещё не реализованы. Не используйте <code>==</code> для структур, ADT, кортежей и списков; извлекайте нужные поля и сравнивайте их.</li><li>Полная инициализация верхнеуровневых <code>const</code> ещё не завершена. Держите рабочие значения внутри функций.</li><li>Универсальные адаптеры nullable/изменяемых JVM-объектов и внешних ресурсов остаются в плане. Гарантии новых списков не распространяются на произвольный внешний объект, который можно получить из старого native API.</li><li>Различающее сопоставление потенциально совпадающих generic-unions ограничено диагностикой <code>pattern.overlapping_generic_union</code>.</li><li>У Java-генератора остаётся ограничение некоторых <code>case</code>-блоков: возврат имени локальной константы, объявленной в этом же блоке, последним выражением может привести к ошибке сгенерированного Java. До исправления вычисляйте итоговое выражение напрямую, как в примере блока ветви выше.</li><li>Часть старого синтаксиса ещё принимается для миграции. Новому коду стоит следовать формам из этого руководства. Диапазоны <code>..</code> и возведение в степень <code>**</code> из целевой спецификации не входят в проверенный набор операций этого учебника.</li><li>Нет обещания полноценной поддержки Go, оптимизации хвостовой рекурсии, автоматического <code>?</code>, классов типов, GADT, изменяемых builders, Map/Set и гарантированной сложности persistent-коллекций.</li></ul>
+<p>Полное текущее состояние фиксируется в <span class="doc-link-missing" title="Документ ещё не опубликован">статусе реализации</span>. Этот раздел помогает выбрать доступную конструкцию, пока язык развивается.</p>
+<h2 id="упражнения-и-памятка">Упражнения и памятка<a class="heading-anchor" href="#упражнения-и-памятка" aria-label="Ссылка на раздел">#</a></h2>
+<h3 id="попробуйте-самостоятельно">Попробуйте самостоятельно<a class="heading-anchor" href="#попробуйте-самостоятельно" aria-label="Ссылка на раздел">#</a></h3>
+<ol><li>Измените первую программу так, чтобы она вывела две строки: имя и приветствие.</li><li>Напишите <code>max(left: int, right: int): int</code>, возвращающую большее число через <code>if</code>.</li><li>Посчитайте сумму списка циклом, затем перепишите решение через <code>fold</code>.</li><li>Напишите <code>last(values: int[]): Option[int]</code>, используя <code>len</code> и безопасную индексацию.</li><li>Создайте <code>Rectangle</code> с шириной и высотой; напишите функцию, возвращающую новую структуру с увеличенной шириной через <code>with</code>.</li><li>Добавьте к дереву <code>Expr</code> вариант умножения. Обновите <code>evaluate</code> и посмотрите, какую диагностику выдаёт компилятор, если забыть новую ветвь.</li><li>Напишите <code>firstPositive(values: int[]): Option[int]</code> через рекурсивные шаблоны <code>[]</code> и <code>[first, ..rest]</code>.</li><li>Измените учебный проект: добавьте вариант <code>Status::Cancelled</code> и явно определите, как его обрабатывают <code>complete</code>, <code>isDone</code> и <code>countDone</code>.</li></ol>
+<h3 id="короткая-памятка">Короткая памятка<a class="heading-anchor" href="#короткая-памятка" aria-label="Ссылка на раздел">#</a></h3>
+<div class="table-wrap"><table><thead><tr><th class="align-left">Задача</th><th class="align-left">Форма</th></tr></thead><tbody><tr><td class="align-left">Сохранить значение</td><td class="align-left"><code>const name = value</code></td></tr><tr><td class="align-left">Переприсваивать локальное имя</td><td class="align-left"><code>var count = 0</code></td></tr><tr><td class="align-left">Объявить функцию</td><td class="align-left"><code>def f(value: int): int { return value }</code></td></tr><tr><td class="align-left">Объявить структуру</td><td class="align-left"><code>type Point = struct { x: int, y: int }</code></td></tr><tr><td class="align-left">Обновить структуру</td><td class="align-left"><code>point with { x = 10 }</code></td></tr><tr><td class="align-left">Объявить варианты</td><td class="align-left"><code>type State = enum { Idle, Busy(value: int), }</code></td></tr><tr><td class="align-left">Представить отсутствие</td><td class="align-left"><code>Option[T]</code></td></tr><tr><td class="align-left">Представить ожидаемую ошибку</td><td class="align-left"><code>Result[T, E]</code></td></tr><tr><td class="align-left">Прочитать элемент списка</td><td class="align-left"><code>values[index]</code>, затем <code>case</code></td></tr><tr><td class="align-left">Вернуть функцию как значение</td><td class="align-left"><code>lambda (x: int): int { return x + 1 }</code></td></tr><tr><td class="align-left">Подключить модуль</td><td class="align-left"><code>use &lt;domain/pricing&gt;</code></td></tr><tr><td class="align-left">Экспортировать объявление</td><td class="align-left"><code>pub def ...</code>, <code>pub type ...</code></td></tr></tbody></table></div>
+<p>Для дальнейшего чтения: <span class="doc-link-missing" title="Документ ещё не опубликован">ADT и сопоставление</span>, <span class="doc-link-missing" title="Документ ещё не опубликован">подробности списков</span>, <a href="../spec/specification.ru.html">целевая спецификация</a>.</p>
+    </article>
+    <nav class="doc-next" aria-label="Дальше">
+      <a href="../spec/specification.ru.html">
+        <span class="next-eyebrow">ДАЛЬШЕ</span>
+        <span class="next-title">Спецификация языка</span>
+        <span class="next-text">Нормативный контракт Core 1.0: система типов, вычисление и полная грамматика.</span>
+      </a>
+      <a class="doc-top-link" href="#main">Наверх ↑</a>
+    </nav>
+  </main>
+  <aside class="docs-aside"><p class="page-toc-title">На этой странице</p>
+  <nav class="page-toc" aria-label="На этой странице">
+    <a href="#подготовка-и-запуск">Подготовка и запуск</a><a href="#первая-программа">Первая программа</a><a href="#как-читать-код">Как читать код</a><a href="#значения-и-базовые-типы">Значения и базовые типы</a><a href="#имена-const-и-var">Имена: const и var</a><a href="#операторы-и-условия">Операторы и условия</a><a href="#функции">Функции</a><a href="#циклы">Циклы</a><a href="#неизменяемые-списки">Неизменяемые списки</a><a href="#option-значение-может-отсутствовать">Option: значение может отсутствовать</a><a href="#функциональные-операции-со-списками">Функциональные операции со списками</a><a href="#структуры-и-обновление-with">Структуры и обновление with</a><a href="#кортежи">Кортежи</a><a href="#enum-несколько-форм-одного-типа">Enum: несколько форм одного типа</a><a href="#case-и-шаблоны">Case и шаблоны</a><a href="#result-ожидаемые-ошибки">Result: ожидаемые ошибки</a><a href="#обобщённые-типы-и-функции">Обобщённые типы и функции</a><a href="#лямбды-и-функции-как-значения">Лямбды и функции как значения</a><a href="#объединения-типов-и-any">Объединения типов и any</a><a href="#модули-и-несколько-файлов">Модули и несколько файлов</a><a href="#стандартные-модули">Стандартные модули</a><a href="#учебный-проект-список-задач">Учебный проект: список задач</a><a href="#частые-ошибки">Частые ошибки</a><a href="#ограничения-текущей-версии">Ограничения текущей версии</a><a href="#упражнения-и-памятка">Упражнения и памятка</a>
+  </nav></aside>
+</div>
+    <footer class="docs-footer">
+  <a class="footer-brand" href="../index.html">ixion</a>
+  <p>Открытый исходный код · Язык для JVM</p>
+  <nav aria-label="Основная навигация">
+    <a href="../docs/ru.html">Руководство</a>
+    <a href="../spec/specification.ru.html">Спецификация</a>
+    <a href="https://github.com/ixionlang/ixion" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+  </nav>
+</footer>
+    <script src="../assets/docs.js" defer></script>
+  </body>
+</html>

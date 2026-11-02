@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f7f4" />
+    <meta name="description" content="Полная синтаксическая грамматика языка Ixion в нотации EBNF." />
+    <meta property="og:title" content="Грамматика Ixion" />
+    <meta property="og:description" content="Полная синтаксическая грамматика языка Ixion в нотации EBNF." />
+    <meta property="og:type" content="article" />
+    <title>Грамматика Ixion — Ixion</title>
+    <link rel="icon" type="image/png" href="../assets/ixion-planet.png" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../assets/docs.css" />
+  </head>
+  <body class="docs-page grammar-page">
+    <a class="skip-link" href="#main">К содержимому</a>
+    <div class="docs-header-bar">
+  <header class="site-header docs-header wrap">
+    <a class="brand" href="../index.html" aria-label="Ixion — Главная">
+      <img src="../assets/ixion-logo.png" alt="ixion" width="126" height="42" />
+    </a>
+    <nav class="docs-nav" aria-label="Основная навигация">
+      <a href="../docs/ru.html">Руководство</a>
+      <a href="../spec/specification.ru.html">Спецификация</a>
+      <a href="../spec/grammar.html" class="active">Грамматика</a>
+      <a class="docs-github" href="https://github.com/ixionlang/ixion" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    </nav>
+    <button class="docs-menu-toggle" type="button" aria-controls="docs-sidebar" aria-expanded="false">
+      <span aria-hidden="true">☰</span> Содержание
+    </button>
+  </header>
+</div>
+    <div class="reading-progress" aria-hidden="true"><span></span></div>
+    <div class="docs-layout docs-layout-narrow">
+  <button class="docs-overlay" type="button" aria-label="Закрыть меню" tabindex="-1"></button>
+  <aside class="docs-sidebar" id="docs-sidebar">
+    <button class="docs-menu-close" type="button" aria-label="Закрыть меню"><span aria-hidden="true">×</span></button>
+    <p class="sidebar-eyebrow">СПРАВОЧНИК</p>
+    <a class="sidebar-title" href="grammar.html">Грамматика Ixion</a>
+    <p class="sidebar-meta">EBNF · 73 правила</p>
+    <label class="docs-search">
+      <span class="visually-hidden">Поиск по разделам</span>
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.5"></circle><path d="m10.5 10.5 3 3"></path></svg>
+      <input type="search" placeholder="Найти раздел…" aria-label="Поиск по разделам" autocomplete="off" />
+    </label>
+    <nav class="docs-toc" aria-label="Содержание документа">
+      <div class="toc-section"><a class="toc-link toc-level-2" href="#prod-module">module</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-use_decl">use_decl</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-declaration">declaration</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-type_decl">type_decl</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-type_definition">type_definition</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-type_parameters">type_parameters</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-struct_definition">struct_definition</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-fields">fields</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-field">field</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-enum_definition">enum_definition</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-variant">variant</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-function_decl">function_decl</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-const_decl">const_decl</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-var_decl">var_decl</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-type_expr">type_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-function_type">function_type</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-union_type">union_type</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-postfix_type">postfix_type</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-type_atom">type_atom</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-type_name">type_name</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-type_arguments">type_arguments</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-type_items">type_items</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-block">block</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-statement">statement</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-assignment">assignment</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-assign_op">assign_op</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-return_stmt">return_stmt</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-if_stmt">if_stmt</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-while_stmt">while_stmt</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-for_stmt">for_stmt</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-expression">expression</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-update_expr">update_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-updates">updates</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-update">update</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-xor_expr">xor_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-or_expr">or_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-and_expr">and_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-comparison_expr">comparison_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-comparison_op">comparison_op</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-sum_expr">sum_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-product_expr">product_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-power_expr">power_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-prefix_expr">prefix_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-postfix_expr">postfix_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-call_suffix">call_suffix</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-index_suffix">index_suffix</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-field_suffix">field_suffix</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-expressions">expressions</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-primary_expr">primary_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-scalar_literal">scalar_literal</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-value_name">value_name</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-value_reference">value_reference</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-variant_reference">variant_reference</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-list_expr">list_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-tuple_expr">tuple_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-lambda_expr">lambda_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-lambda_parameters">lambda_parameters</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-lambda_parameter">lambda_parameter</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-case_expr">case_expr</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-branches">branches</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-branch">branch</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-pattern">pattern</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-negative_literal">negative_literal</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-constructor_pattern">constructor_pattern</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-struct_pattern">struct_pattern</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-field_patterns">field_patterns</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-field_pattern">field_pattern</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-type_pattern">type_pattern</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-patterns">patterns</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-tuple_pattern">tuple_pattern</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-list_pattern">list_pattern</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-list_pattern_items">list_pattern_items</a></div><div class="toc-section"><a class="toc-link toc-level-2" href="#prod-rest_pattern">rest_pattern</a></div>
+      <p class="toc-empty">Разделы не найдены</p>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="../spec/specification.ru.html">Спецификация языка ↗</a>
+    </div>
+  </aside>
+  <main class="docs-main" id="main">
+    <div class="doc-hero">
+      <div class="doc-breadcrumb">
+        <a href="../docs/index.html">Документация</a>
+        <span aria-hidden="true">/</span>
+        <span>грамматика</span>
+      </div>
+      <div class="doc-hero-row">
+        <div>
+          <h1>Грамматика Ixion</h1>
+          <p class="doc-subtitle">Полная синтаксическая грамматика языка в нотации EBNF.</p>
+        </div>
+        <div class="doc-lang-switch"><span class="active">EBNF</span></div>
+      </div>
+      <div class="doc-meta"><span><strong>Правил:</strong> 73</span><span><a href="grammar.ebnf">Скачать .ebnf</a></span></div>
+    </div>
+    <article class="doc-content grammar-content">
+      <p class="doc-lead">Полная синтаксическая грамматика Ixion в нотации EBNF. Правила сгруппированы по объявлениям и выражениям; каждое правило можно открыть по прямой ссылке.</p>
+<p>Машиночитаемая копия: <a href="grammar.ebnf">grammar.ebnf</a>.</p>
+<div class="grammar-list">
+<section class="grammar-item" id="prod-module">
+  <h2>module<a class="heading-anchor" href="#prod-module" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">module</span>              = <span class="tok-op">{</span> use_decl | declaration <span class="tok-op">}</span> <span class="tok-type">EOF</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-use_decl">
+  <h2>use_decl<a class="heading-anchor" href="#prod-use_decl" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">use_decl</span>            = <span class="tok-str">&quot;use&quot;</span> <span class="tok-str">&quot;&lt;&quot;</span> <span class="tok-type">IDENT</span> <span class="tok-op">{</span> <span class="tok-str">&quot;/&quot;</span> <span class="tok-type">IDENT</span> <span class="tok-op">}</span> <span class="tok-str">&quot;&gt;&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-declaration">
+  <h2>declaration<a class="heading-anchor" href="#prod-declaration" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">declaration</span>         = <span class="tok-op">[</span> <span class="tok-str">&quot;pub&quot;</span> <span class="tok-op">]</span> <span class="tok-op">(</span> type_decl | function_decl | const_decl <span class="tok-op">)</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-type_decl">
+  <h2>type_decl<a class="heading-anchor" href="#prod-type_decl" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">type_decl</span>           = <span class="tok-str">&quot;type&quot;</span> <span class="tok-type">IDENT</span> <span class="tok-op">[</span> type_parameters <span class="tok-op">]</span> <span class="tok-str">&quot;=&quot;</span> type_definition <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-type_definition">
+  <h2>type_definition<a class="heading-anchor" href="#prod-type_definition" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">type_definition</span>     = struct_definition | enum_definition | type_expr <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-type_parameters">
+  <h2>type_parameters<a class="heading-anchor" href="#prod-type_parameters" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">type_parameters</span>     = <span class="tok-str">&quot;[&quot;</span> <span class="tok-type">IDENT</span> <span class="tok-op">{</span> <span class="tok-str">&quot;,&quot;</span> <span class="tok-type">IDENT</span> <span class="tok-op">}</span> <span class="tok-op">[</span> <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">]</span> <span class="tok-str">&quot;]&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-struct_definition">
+  <h2>struct_definition<a class="heading-anchor" href="#prod-struct_definition" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">struct_definition</span>   = <span class="tok-str">&quot;struct&quot;</span> <span class="tok-str">&quot;{&quot;</span> <span class="tok-op">[</span> fields <span class="tok-op">]</span> <span class="tok-str">&quot;}&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-fields">
+  <h2>fields<a class="heading-anchor" href="#prod-fields" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">fields</span>              = field <span class="tok-op">{</span> <span class="tok-str">&quot;,&quot;</span> field <span class="tok-op">}</span> <span class="tok-op">[</span> <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-field">
+  <h2>field<a class="heading-anchor" href="#prod-field" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">field</span>               = <span class="tok-type">IDENT</span> <span class="tok-str">&quot;:&quot;</span> type_expr <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-enum_definition">
+  <h2>enum_definition<a class="heading-anchor" href="#prod-enum_definition" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">enum_definition</span>     = <span class="tok-str">&quot;enum&quot;</span> <span class="tok-str">&quot;{&quot;</span> variant <span class="tok-op">{</span> <span class="tok-str">&quot;,&quot;</span> variant <span class="tok-op">}</span> <span class="tok-op">[</span> <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">]</span> <span class="tok-str">&quot;}&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-variant">
+  <h2>variant<a class="heading-anchor" href="#prod-variant" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">variant</span>             = <span class="tok-type">IDENT</span> <span class="tok-op">[</span> <span class="tok-str">&quot;(&quot;</span> fields <span class="tok-str">&quot;)&quot;</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-function_decl">
+  <h2>function_decl<a class="heading-anchor" href="#prod-function_decl" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">function_decl</span>       = <span class="tok-str">&quot;def&quot;</span> <span class="tok-type">IDENT</span> <span class="tok-op">[</span> type_parameters <span class="tok-op">]</span> <span class="tok-str">&quot;(&quot;</span> <span class="tok-op">[</span> fields <span class="tok-op">]</span> <span class="tok-str">&quot;)&quot;</span>
+                      <span class="tok-op">[</span> <span class="tok-str">&quot;:&quot;</span> type_expr <span class="tok-op">]</span> block <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-const_decl">
+  <h2>const_decl<a class="heading-anchor" href="#prod-const_decl" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">const_decl</span>          = <span class="tok-str">&quot;const&quot;</span> <span class="tok-type">IDENT</span> <span class="tok-op">[</span> <span class="tok-str">&quot;:&quot;</span> type_expr <span class="tok-op">]</span> <span class="tok-str">&quot;=&quot;</span> expression <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-var_decl">
+  <h2>var_decl<a class="heading-anchor" href="#prod-var_decl" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">var_decl</span>            = <span class="tok-str">&quot;var&quot;</span> <span class="tok-type">IDENT</span> <span class="tok-op">[</span> <span class="tok-str">&quot;:&quot;</span> type_expr <span class="tok-op">]</span> <span class="tok-str">&quot;=&quot;</span> expression <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-type_expr">
+  <h2>type_expr<a class="heading-anchor" href="#prod-type_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">type_expr</span>           = function_type | union_type <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-function_type">
+  <h2>function_type<a class="heading-anchor" href="#prod-function_type" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">function_type</span>       = <span class="tok-str">&quot;(&quot;</span> <span class="tok-op">[</span> type_items <span class="tok-op">]</span> <span class="tok-str">&quot;)&quot;</span> <span class="tok-str">&quot;=&gt;&quot;</span> type_expr <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-union_type">
+  <h2>union_type<a class="heading-anchor" href="#prod-union_type" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">union_type</span>          = postfix_type <span class="tok-op">{</span> <span class="tok-str">&quot;|&quot;</span> postfix_type <span class="tok-op">}</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-postfix_type">
+  <h2>postfix_type<a class="heading-anchor" href="#prod-postfix_type" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">postfix_type</span>        = type_atom <span class="tok-op">{</span> <span class="tok-str">&quot;[&quot;</span> <span class="tok-str">&quot;]&quot;</span> <span class="tok-op">}</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-type_atom">
+  <h2>type_atom<a class="heading-anchor" href="#prod-type_atom" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">type_atom</span>           = type_name <span class="tok-op">[</span> type_arguments <span class="tok-op">]</span> | <span class="tok-str">&quot;never&quot;</span> | <span class="tok-str">&quot;(&quot;</span> <span class="tok-str">&quot;)&quot;</span>
+                    | <span class="tok-str">&quot;(&quot;</span> type_expr <span class="tok-str">&quot;)&quot;</span> | <span class="tok-str">&quot;(&quot;</span> type_expr <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">[</span> type_items <span class="tok-op">]</span> <span class="tok-str">&quot;)&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-type_name">
+  <h2>type_name<a class="heading-anchor" href="#prod-type_name" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">type_name</span>           = <span class="tok-type">IDENT</span> <span class="tok-op">[</span> <span class="tok-str">&quot;::&quot;</span> <span class="tok-type">IDENT</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-type_arguments">
+  <h2>type_arguments<a class="heading-anchor" href="#prod-type_arguments" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">type_arguments</span>      = <span class="tok-str">&quot;[&quot;</span> type_items <span class="tok-str">&quot;]&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-type_items">
+  <h2>type_items<a class="heading-anchor" href="#prod-type_items" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">type_items</span>          = type_expr <span class="tok-op">{</span> <span class="tok-str">&quot;,&quot;</span> type_expr <span class="tok-op">}</span> <span class="tok-op">[</span> <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-block">
+  <h2>block<a class="heading-anchor" href="#prod-block" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">block</span>               = <span class="tok-str">&quot;{&quot;</span> <span class="tok-op">{</span> statement <span class="tok-op">}</span> <span class="tok-str">&quot;}&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-statement">
+  <h2>statement<a class="heading-anchor" href="#prod-statement" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">statement</span>           = const_decl | var_decl | assignment | return_stmt
+                    | if_stmt | while_stmt | for_stmt | block | expression <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-assignment">
+  <h2>assignment<a class="heading-anchor" href="#prod-assignment" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">assignment</span>          = <span class="tok-type">IDENT</span> assign_op expression | <span class="tok-type">IDENT</span> <span class="tok-op">(</span> <span class="tok-str">&quot;++&quot;</span> | <span class="tok-str">&quot;--&quot;</span> <span class="tok-op">)</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-assign_op">
+  <h2>assign_op<a class="heading-anchor" href="#prod-assign_op" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">assign_op</span>           = <span class="tok-str">&quot;=&quot;</span> | <span class="tok-str">&quot;+=&quot;</span> | <span class="tok-str">&quot;-=&quot;</span> | <span class="tok-str">&quot;*=&quot;</span> | <span class="tok-str">&quot;/=&quot;</span> | <span class="tok-str">&quot;%=&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-return_stmt">
+  <h2>return_stmt<a class="heading-anchor" href="#prod-return_stmt" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">return_stmt</span>         = <span class="tok-str">&quot;return&quot;</span> expression <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-if_stmt">
+  <h2>if_stmt<a class="heading-anchor" href="#prod-if_stmt" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">if_stmt</span>             = <span class="tok-str">&quot;if&quot;</span> expression block <span class="tok-op">[</span> <span class="tok-str">&quot;else&quot;</span> <span class="tok-op">(</span> if_stmt | block <span class="tok-op">)</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-while_stmt">
+  <h2>while_stmt<a class="heading-anchor" href="#prod-while_stmt" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">while_stmt</span>          = <span class="tok-str">&quot;while&quot;</span> expression block <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-for_stmt">
+  <h2>for_stmt<a class="heading-anchor" href="#prod-for_stmt" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">for_stmt</span>            = <span class="tok-str">&quot;for&quot;</span> <span class="tok-type">IDENT</span> <span class="tok-str">&quot;:&quot;</span> expression block <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-expression">
+  <h2>expression<a class="heading-anchor" href="#prod-expression" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">expression</span>          = update_expr <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-update_expr">
+  <h2>update_expr<a class="heading-anchor" href="#prod-update_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">update_expr</span>         = xor_expr <span class="tok-op">{</span> <span class="tok-str">&quot;with&quot;</span> <span class="tok-str">&quot;{&quot;</span> <span class="tok-op">[</span> updates <span class="tok-op">]</span> <span class="tok-str">&quot;}&quot;</span> <span class="tok-op">}</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-updates">
+  <h2>updates<a class="heading-anchor" href="#prod-updates" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">updates</span>             = update <span class="tok-op">{</span> <span class="tok-str">&quot;,&quot;</span> update <span class="tok-op">}</span> <span class="tok-op">[</span> <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-update">
+  <h2>update<a class="heading-anchor" href="#prod-update" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">update</span>              = <span class="tok-type">IDENT</span> <span class="tok-str">&quot;=&quot;</span> expression <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-xor_expr">
+  <h2>xor_expr<a class="heading-anchor" href="#prod-xor_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">xor_expr</span>            = or_expr <span class="tok-op">{</span> <span class="tok-str">&quot;^&quot;</span> or_expr <span class="tok-op">}</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-or_expr">
+  <h2>or_expr<a class="heading-anchor" href="#prod-or_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">or_expr</span>             = and_expr <span class="tok-op">{</span> <span class="tok-str">&quot;||&quot;</span> and_expr <span class="tok-op">}</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-and_expr">
+  <h2>and_expr<a class="heading-anchor" href="#prod-and_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">and_expr</span>            = comparison_expr <span class="tok-op">{</span> <span class="tok-str">&quot;&amp;&amp;&quot;</span> comparison_expr <span class="tok-op">}</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-comparison_expr">
+  <h2>comparison_expr<a class="heading-anchor" href="#prod-comparison_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">comparison_expr</span>     = sum_expr <span class="tok-op">[</span> comparison_op sum_expr <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-comparison_op">
+  <h2>comparison_op<a class="heading-anchor" href="#prod-comparison_op" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">comparison_op</span>       = <span class="tok-str">&quot;==&quot;</span> | <span class="tok-str">&quot;!=&quot;</span> | <span class="tok-str">&quot;&lt;&quot;</span> | <span class="tok-str">&quot;&lt;=&quot;</span> | <span class="tok-str">&quot;&gt;&quot;</span> | <span class="tok-str">&quot;&gt;=&quot;</span> | <span class="tok-str">&quot;..&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-sum_expr">
+  <h2>sum_expr<a class="heading-anchor" href="#prod-sum_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">sum_expr</span>            = product_expr <span class="tok-op">{</span> <span class="tok-op">(</span> <span class="tok-str">&quot;+&quot;</span> | <span class="tok-str">&quot;-&quot;</span> <span class="tok-op">)</span> product_expr <span class="tok-op">}</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-product_expr">
+  <h2>product_expr<a class="heading-anchor" href="#prod-product_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">product_expr</span>        = power_expr <span class="tok-op">{</span> <span class="tok-op">(</span> <span class="tok-str">&quot;*&quot;</span> | <span class="tok-str">&quot;/&quot;</span> | <span class="tok-str">&quot;%&quot;</span> <span class="tok-op">)</span> power_expr <span class="tok-op">}</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-power_expr">
+  <h2>power_expr<a class="heading-anchor" href="#prod-power_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">power_expr</span>          = prefix_expr <span class="tok-op">[</span> <span class="tok-str">&quot;**&quot;</span> power_expr <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-prefix_expr">
+  <h2>prefix_expr<a class="heading-anchor" href="#prod-prefix_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">prefix_expr</span>         = <span class="tok-op">(</span> <span class="tok-str">&quot;+&quot;</span> | <span class="tok-str">&quot;-&quot;</span> | <span class="tok-str">&quot;!&quot;</span> <span class="tok-op">)</span> prefix_expr | postfix_expr <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-postfix_expr">
+  <h2>postfix_expr<a class="heading-anchor" href="#prod-postfix_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">postfix_expr</span>        = primary_expr <span class="tok-op">{</span> call_suffix | index_suffix | field_suffix <span class="tok-op">}</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-call_suffix">
+  <h2>call_suffix<a class="heading-anchor" href="#prod-call_suffix" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">call_suffix</span>         = <span class="tok-str">&quot;(&quot;</span> <span class="tok-op">[</span> expressions <span class="tok-op">]</span> <span class="tok-str">&quot;)&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-index_suffix">
+  <h2>index_suffix<a class="heading-anchor" href="#prod-index_suffix" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">index_suffix</span>        = <span class="tok-str">&quot;[&quot;</span> expression <span class="tok-str">&quot;]&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-field_suffix">
+  <h2>field_suffix<a class="heading-anchor" href="#prod-field_suffix" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">field_suffix</span>        = <span class="tok-str">&quot;.&quot;</span> <span class="tok-type">IDENT</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-expressions">
+  <h2>expressions<a class="heading-anchor" href="#prod-expressions" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">expressions</span>         = expression <span class="tok-op">{</span> <span class="tok-str">&quot;,&quot;</span> expression <span class="tok-op">}</span> <span class="tok-op">[</span> <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-primary_expr">
+  <h2>primary_expr<a class="heading-anchor" href="#prod-primary_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">primary_expr</span>        = scalar_literal | value_reference | lambda_expr | case_expr
+                    | list_expr | <span class="tok-str">&quot;(&quot;</span> expression <span class="tok-str">&quot;)&quot;</span> | tuple_expr <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-scalar_literal">
+  <h2>scalar_literal<a class="heading-anchor" href="#prod-scalar_literal" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">scalar_literal</span>      = <span class="tok-type">INT_LIT</span> | <span class="tok-type">FLOAT_LIT</span> | <span class="tok-type">DOUBLE_LIT</span> | <span class="tok-type">CHAR_LIT</span> | <span class="tok-type">STRING_LIT</span>
+                    | <span class="tok-str">&quot;true&quot;</span> | <span class="tok-str">&quot;false&quot;</span> | <span class="tok-str">&quot;(&quot;</span> <span class="tok-str">&quot;)&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-value_name">
+  <h2>value_name<a class="heading-anchor" href="#prod-value_name" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">value_name</span>          = <span class="tok-type">IDENT</span> <span class="tok-op">[</span> <span class="tok-str">&quot;::&quot;</span> <span class="tok-type">IDENT</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-value_reference">
+  <h2>value_reference<a class="heading-anchor" href="#prod-value_reference" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">value_reference</span>     = value_name <span class="tok-op">[</span> type_arguments <span class="tok-op">]</span> | variant_reference <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-variant_reference">
+  <h2>variant_reference<a class="heading-anchor" href="#prod-variant_reference" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">variant_reference</span>   = type_name <span class="tok-op">[</span> type_arguments <span class="tok-op">]</span> <span class="tok-str">&quot;::&quot;</span> <span class="tok-type">IDENT</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-list_expr">
+  <h2>list_expr<a class="heading-anchor" href="#prod-list_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">list_expr</span>           = <span class="tok-str">&quot;[&quot;</span> <span class="tok-op">[</span> expressions <span class="tok-op">]</span> <span class="tok-str">&quot;]&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-tuple_expr">
+  <h2>tuple_expr<a class="heading-anchor" href="#prod-tuple_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">tuple_expr</span>          = <span class="tok-str">&quot;(&quot;</span> expression <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">[</span> expressions <span class="tok-op">]</span> <span class="tok-str">&quot;)&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-lambda_expr">
+  <h2>lambda_expr<a class="heading-anchor" href="#prod-lambda_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">lambda_expr</span>         = <span class="tok-str">&quot;lambda&quot;</span> <span class="tok-str">&quot;(&quot;</span> <span class="tok-op">[</span> lambda_parameters <span class="tok-op">]</span> <span class="tok-str">&quot;)&quot;</span>
+                      <span class="tok-op">[</span> <span class="tok-str">&quot;:&quot;</span> type_expr <span class="tok-op">]</span> block <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-lambda_parameters">
+  <h2>lambda_parameters<a class="heading-anchor" href="#prod-lambda_parameters" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">lambda_parameters</span>   = lambda_parameter <span class="tok-op">{</span> <span class="tok-str">&quot;,&quot;</span> lambda_parameter <span class="tok-op">}</span> <span class="tok-op">[</span> <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-lambda_parameter">
+  <h2>lambda_parameter<a class="heading-anchor" href="#prod-lambda_parameter" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">lambda_parameter</span>    = <span class="tok-type">IDENT</span> <span class="tok-op">[</span> <span class="tok-str">&quot;:&quot;</span> type_expr <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-case_expr">
+  <h2>case_expr<a class="heading-anchor" href="#prod-case_expr" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">case_expr</span>           = <span class="tok-str">&quot;case&quot;</span> expression <span class="tok-str">&quot;{&quot;</span> <span class="tok-op">[</span> branches <span class="tok-op">]</span> <span class="tok-str">&quot;}&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-branches">
+  <h2>branches<a class="heading-anchor" href="#prod-branches" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">branches</span>            = branch <span class="tok-op">{</span> <span class="tok-str">&quot;,&quot;</span> branch <span class="tok-op">}</span> <span class="tok-op">[</span> <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-branch">
+  <h2>branch<a class="heading-anchor" href="#prod-branch" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">branch</span>              = pattern <span class="tok-op">[</span> <span class="tok-str">&quot;if&quot;</span> expression <span class="tok-op">]</span> <span class="tok-str">&quot;=&gt;&quot;</span> <span class="tok-op">(</span> block | expression <span class="tok-op">)</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-pattern">
+  <h2>pattern<a class="heading-anchor" href="#prod-pattern" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">pattern</span>             = <span class="tok-str">&quot;_&quot;</span> | scalar_literal | negative_literal | <span class="tok-type">IDENT</span>
+                    | constructor_pattern | struct_pattern | type_pattern
+                    | <span class="tok-str">&quot;(&quot;</span> pattern <span class="tok-str">&quot;)&quot;</span> | tuple_pattern | list_pattern <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-negative_literal">
+  <h2>negative_literal<a class="heading-anchor" href="#prod-negative_literal" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">negative_literal</span>    = <span class="tok-str">&quot;-&quot;</span> <span class="tok-op">(</span> <span class="tok-type">INT_LIT</span> | <span class="tok-type">FLOAT_LIT</span> | <span class="tok-type">DOUBLE_LIT</span> <span class="tok-op">)</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-constructor_pattern">
+  <h2>constructor_pattern<a class="heading-anchor" href="#prod-constructor_pattern" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">constructor_pattern</span> = variant_reference <span class="tok-op">[</span> <span class="tok-str">&quot;(&quot;</span> patterns <span class="tok-str">&quot;)&quot;</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-struct_pattern">
+  <h2>struct_pattern<a class="heading-anchor" href="#prod-struct_pattern" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">struct_pattern</span>      = type_name <span class="tok-op">[</span> type_arguments <span class="tok-op">]</span> <span class="tok-str">&quot;{&quot;</span> <span class="tok-op">[</span> field_patterns <span class="tok-op">]</span> <span class="tok-str">&quot;}&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-field_patterns">
+  <h2>field_patterns<a class="heading-anchor" href="#prod-field_patterns" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">field_patterns</span>      = field_pattern <span class="tok-op">{</span> <span class="tok-str">&quot;,&quot;</span> field_pattern <span class="tok-op">}</span> <span class="tok-op">[</span> <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-field_pattern">
+  <h2>field_pattern<a class="heading-anchor" href="#prod-field_pattern" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">field_pattern</span>       = <span class="tok-type">IDENT</span> <span class="tok-str">&quot;:&quot;</span> pattern <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-type_pattern">
+  <h2>type_pattern<a class="heading-anchor" href="#prod-type_pattern" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">type_pattern</span>        = type_expr <span class="tok-type">IDENT</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-patterns">
+  <h2>patterns<a class="heading-anchor" href="#prod-patterns" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">patterns</span>            = pattern <span class="tok-op">{</span> <span class="tok-str">&quot;,&quot;</span> pattern <span class="tok-op">}</span> <span class="tok-op">[</span> <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-tuple_pattern">
+  <h2>tuple_pattern<a class="heading-anchor" href="#prod-tuple_pattern" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">tuple_pattern</span>       = <span class="tok-str">&quot;(&quot;</span> pattern <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">[</span> patterns <span class="tok-op">]</span> <span class="tok-str">&quot;)&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-list_pattern">
+  <h2>list_pattern<a class="heading-anchor" href="#prod-list_pattern" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">list_pattern</span>        = <span class="tok-str">&quot;[&quot;</span> <span class="tok-op">[</span> rest_pattern | list_pattern_items <span class="tok-op">]</span> <span class="tok-str">&quot;]&quot;</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-list_pattern_items">
+  <h2>list_pattern_items<a class="heading-anchor" href="#prod-list_pattern_items" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">list_pattern_items</span>  = pattern <span class="tok-op">{</span> <span class="tok-str">&quot;,&quot;</span> pattern <span class="tok-op">}</span> <span class="tok-op">[</span> <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">[</span> rest_pattern <span class="tok-op">]</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+<section class="grammar-item" id="prod-rest_pattern">
+  <h2>rest_pattern<a class="heading-anchor" href="#prod-rest_pattern" aria-label="Ссылка на раздел">#</a></h2>
+  <pre class="grammar-code" tabindex="0"><code class="language-ebnf"><span class="tok-kw">rest_pattern</span>        = <span class="tok-str">&quot;..&quot;</span> <span class="tok-op">(</span> <span class="tok-type">IDENT</span> | <span class="tok-str">&quot;_&quot;</span> <span class="tok-op">)</span> <span class="tok-op">[</span> <span class="tok-str">&quot;,&quot;</span> <span class="tok-op">]</span> <span class="tok-op">;</span></code></pre>
+</section>
+</div>
+    </article>
+    <nav class="doc-next" aria-label="Дальше">
+      <a href="../spec/specification.ru.html">
+        <span class="next-eyebrow">ДАЛЬШЕ</span>
+        <span class="next-title">Спецификация языка</span>
+        <span class="next-text">Нормативное описание типов, вычисления и синтаксиса.</span>
+      </a>
+      <a class="doc-top-link" href="#main">Наверх ↑</a>
+    </nav>
+  </main>
+</div>
+    <footer class="docs-footer">
+  <a class="footer-brand" href="../index.html">ixion</a>
+  <p>Открытый исходный код · Язык для JVM</p>
+  <nav aria-label="Основная навигация">
+    <a href="../docs/ru.html">Руководство</a>
+    <a href="../spec/specification.ru.html">Спецификация</a>
+    <a href="https://github.com/ixionlang/ixion" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+  </nav>
+</footer>
+    <script src="../assets/docs.js" defer></script>
+  </body>
+</html>
